@@ -1,0 +1,548 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>YDrizz · Download YouTube MP4 & MP3</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --red: #cc0000;
+    --red-dark: #990000;
+    --red-light: #ff4444;
+    --bg: #0a0a0a;
+    --surface: #131313;
+    --surface2: #1c1c1c;
+    --border: #2a2a2a;
+    --text: #f0f0f0;
+    --muted: #888;
+    --success: #22c55e;
+    --radius: 12px;
+  }
+
+  body {
+    font-family: 'Space Grotesk', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  header {
+    width: 100%;
+    padding: 1.2rem 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 12px;
+    border-bottom: 1px solid var(--border);
+  }
+  .logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .logo-icon {
+    width: 38px; height: 38px;
+    background: var(--red);
+    border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .logo-icon svg { width: 20px; height: 20px; fill: white; }
+  .logo-text { font-size: 1.3rem; font-weight: 700; letter-spacing: -0.5px; }
+  .logo-text span { color: var(--red-light); }
+  .tagline { font-size: 0.75rem; color: var(--muted); margin-left: 5px; }
+
+  main {
+    width: 100%; max-width: 800px;
+    padding: 2rem 1.5rem;
+    flex: 1;
+  }
+
+  h1 {
+    font-size: 2rem;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+    margin-bottom: 0.5rem;
+  }
+  h1 em { color: var(--red-light); font-style: normal; }
+  .subtitle {
+    color: var(--muted);
+    font-size: 0.9rem;
+    margin-bottom: 1.8rem;
+    border-left: 3px solid var(--red);
+    padding-left: 12px;
+  }
+
+  .input-wrap {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 1rem;
+    flex-wrap: wrap;
+  }
+  .input-wrap input {
+    flex: 1;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    color: var(--text);
+    font-family: 'DM Mono', monospace;
+    font-size: 0.85rem;
+    padding: 0.85rem 1rem;
+    outline: none;
+    transition: border-color 0.2s;
+  }
+  .input-wrap input:focus { border-color: var(--red); }
+  .btn-icon {
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    color: var(--text);
+    padding: 0 1rem;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: all 0.2s;
+  }
+  .btn-icon:hover { border-color: var(--red); color: var(--red-light); }
+  .btn-fetch {
+    background: var(--red);
+    border: none;
+    border-radius: var(--radius);
+    color: white;
+    font-weight: 600;
+    padding: 0 1.5rem;
+    cursor: pointer;
+    transition: background 0.2s;
+  }
+  .btn-fetch:hover { background: var(--red-dark); }
+  .btn-fetch:disabled, .btn-icon:disabled { opacity: 0.5; cursor: not-allowed; }
+
+  /* History dropdown */
+  .history-wrap {
+    margin-bottom: 1.2rem;
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+  .history-badge {
+    background: var(--surface);
+    border-radius: 20px;
+    padding: 5px 12px;
+    font-size: 0.7rem;
+    color: var(--muted);
+    cursor: pointer;
+    transition: all 0.2s;
+    border: 1px solid var(--border);
+  }
+  .history-badge:hover { border-color: var(--red); color: var(--red-light); }
+  .clear-history {
+    color: var(--muted);
+    font-size: 0.7rem;
+    cursor: pointer;
+    background: none;
+    border: none;
+  }
+  .clear-history:hover { color: var(--red-light); }
+
+  /* FFmpeg warning */
+  .ffmpeg-warning {
+    background: rgba(204,0,0,0.15);
+    border-left: 4px solid var(--red);
+    padding: 8px 12px;
+    font-size: 0.75rem;
+    margin-bottom: 1rem;
+    border-radius: 6px;
+    display: none;
+  }
+
+  #loading {
+    display: none;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 1.2rem;
+  }
+  .spinner { width: 18px; height: 18px; border: 2px solid var(--border); border-top-color: var(--red); border-radius: 50%; animation: spin 0.7s linear infinite; }
+  @keyframes spin { to { transform: rotate(360deg); } }
+
+  #video-card {
+    display: none;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    overflow: hidden;
+    margin-bottom: 1.5rem;
+  }
+  .thumb-wrap { position: relative; width: 100%; aspect-ratio: 16/9; background: #111; }
+  .thumb-wrap img { width: 100%; height: 100%; object-fit: cover; }
+  .duration-badge { position: absolute; bottom: 8px; right: 8px; background: rgba(0,0,0,0.8); padding: 2px 8px; border-radius: 20px; font-size: 0.7rem; font-family: monospace; }
+  .video-meta { padding: 1rem; }
+  .video-title { font-weight: 600; margin-bottom: 4px; }
+  .video-sub { font-size: 0.75rem; color: var(--muted); }
+
+  #format-section { display: none; margin-bottom: 1rem; }
+  .section-label { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 1px; color: var(--muted); margin-bottom: 0.5rem; }
+  .formats-group { margin-bottom: 1.2rem; }
+  .group-title { font-size: 0.8rem; font-weight: 500; margin-bottom: 6px; color: var(--muted); border-left: 2px solid var(--red); padding-left: 8px; }
+  .formats-grid { display: flex; flex-wrap: wrap; gap: 8px; }
+  .fmt-btn {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 6px 14px;
+    font-size: 0.8rem;
+    cursor: pointer;
+    transition: all 0.15s;
+  }
+  .fmt-btn:hover { border-color: var(--red); background: var(--surface2); }
+  .fmt-btn.selected { border-color: var(--red); background: rgba(204,0,0,0.2); color: var(--red-light); }
+
+  .btn-download {
+    width: 100%;
+    background: var(--red);
+    border: none;
+    border-radius: var(--radius);
+    color: white;
+    font-weight: 700;
+    padding: 0.9rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    transition: 0.2s;
+  }
+  .btn-download:disabled { background: #333; cursor: not-allowed; }
+  .btn-download:hover:not(:disabled) { background: var(--red-dark); }
+
+  #toast {
+    display: none;
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 0.8rem;
+    margin-top: 1rem;
+    font-size: 0.8rem;
+  }
+  #toast.success { border-color: var(--success); color: #86efac; }
+  #toast.error { border-color: var(--red); color: #fca5a5; }
+
+  footer { text-align: center; padding: 1.2rem; font-size: 0.7rem; color: #444; }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo">
+    <div class="logo-icon"><svg viewBox="0 0 24 24"><path d="M10 15l5.19-3L10 9v6zm11.56-7.83c.25.94.43 2.2.54 3.71L22 12c0 3.49-.26 5.97-.44 6.83-.17.64-.67 1.15-1.29 1.32-.94.25-4.71.43-8.27.43s-7.33-.18-8.27-.43c-.62-.17-1.12-.68-1.29-1.32C2.26 17.97 2 15.49 2 12s.26-5.97.44-6.83c.17-.64.67-1.15 1.29-1.32C4.67 3.6 8.44 3.43 12 3.43s7.33.17 8.27.43c.62.17 1.12.68 1.29 1.31z"/></svg></div>
+    <div class="logo-text">YD<span>rizz</span></div>
+    <div class="tagline">MP4 · MP3 · Cepat</div>
+  </div>
+</header>
+
+<main>
+  <h1>Download YouTube ke <em>MP4 & MP3</em></h1>
+  <div class="subtitle">Tempel URL, pilih kualitas, satu klik — selesai.</div>
+
+  <div class="input-wrap">
+    <input type="text" id="urlInput" placeholder="https://www.youtube.com/watch?v=...">
+    <button class="btn-icon" id="pasteBtn" title="Tempel dari clipboard">📋</button>
+    <button class="btn-fetch" id="fetchBtn">Cek Video</button>
+  </div>
+
+  <div class="history-wrap" id="historyWrap" style="display: none;">
+    <span style="font-size:0.7rem;">🕘 Riwayat:</span>
+    <div id="historyList" style="display: flex; flex-wrap: wrap; gap: 6px;"></div>
+    <button id="clearHistoryBtn" class="clear-history">Hapus</button>
+  </div>
+
+  <div id="ffmpegWarning" class="ffmpeg-warning">
+    ⚠️ FFmpeg tidak terinstal. Video resolusi tinggi hanya dapat diunduh sebagai "video only" (tanpa suara). <a href="https://ffmpeg.org/download.html" target="_blank" style="color:var(--red-light)">Cara install FFmpeg</a>
+  </div>
+
+  <div id="loading"><div class="spinner"></div><span>Memuat info video...</span></div>
+
+  <div id="video-card">
+    <div class="thumb-wrap"><img id="thumb" alt="thumbnail"><span id="duration" class="duration-badge">--:--</span></div>
+    <div class="video-meta"><div id="videoTitle" class="video-title">—</div><div id="videoSub" class="video-sub">—</div></div>
+  </div>
+
+  <div id="format-section">
+    <div class="section-label">Pilih kualitas</div>
+    <div id="combinedGroup" class="formats-group" style="display: none;">
+      <div class="group-title">🎬 Video + Audio (MP4)</div>
+      <div id="combinedGrid" class="formats-grid"></div>
+    </div>
+    <div id="videoOnlyGroup" class="formats-group" style="display: none;">
+      <div class="group-title">🎥 Video only (tanpa suara, MP4)</div>
+      <div id="videoOnlyGrid" class="formats-grid"></div>
+    </div>
+    <div id="audioGroup" class="formats-group" style="display: none;">
+      <div class="group-title">🎵 Audio only (MP3)</div>
+      <div id="audioGrid" class="formats-grid"></div>
+    </div>
+    <button id="downloadBtn" class="btn-download" disabled>⬇ Pilih format terlebih dahulu</button>
+    <div id="toast"></div>
+  </div>
+</main>
+<footer>YDrizz · powered by yt-dlp · Download langsung ke browser</footer>
+
+<script>
+  // ================== YDRIZZ FRONTEND ==================
+  let selectedFormatId = null;
+  let currentVideoUrl = "";
+  let ffmpegAvailable = true;  // akan diupdate dari server nanti (lewat warning flag)
+  
+  const DOM = {
+    urlInput: document.getElementById('urlInput'),
+    fetchBtn: document.getElementById('fetchBtn'),
+    pasteBtn: document.getElementById('pasteBtn'),
+    historyWrap: document.getElementById('historyWrap'),
+    historyList: document.getElementById('historyList'),
+    clearHistoryBtn: document.getElementById('clearHistoryBtn'),
+    ffmpegWarning: document.getElementById('ffmpegWarning'),
+    loading: document.getElementById('loading'),
+    videoCard: document.getElementById('video-card'),
+    thumb: document.getElementById('thumb'),
+    duration: document.getElementById('duration'),
+    videoTitle: document.getElementById('videoTitle'),
+    videoSub: document.getElementById('videoSub'),
+    formatSection: document.getElementById('format-section'),
+    combinedGroup: document.getElementById('combinedGroup'),
+    combinedGrid: document.getElementById('combinedGrid'),
+    videoOnlyGroup: document.getElementById('videoOnlyGroup'),
+    videoOnlyGrid: document.getElementById('videoOnlyGrid'),
+    audioGroup: document.getElementById('audioGroup'),
+    audioGrid: document.getElementById('audioGrid'),
+    downloadBtn: document.getElementById('downloadBtn'),
+    toast: document.getElementById('toast')
+  };
+
+  // Helper
+  function showToast(type, title, msg) {
+    DOM.toast.className = type;
+    DOM.toast.innerHTML = `<strong>${escapeHtml(title)}</strong><br>${escapeHtml(msg)}`;
+    DOM.toast.style.display = "block";
+    if (type === "success") setTimeout(() => DOM.toast.style.display = "none", 8000);
+  }
+  function escapeHtml(str) {
+    if(!str) return "";
+    return str.replace(/[&<>]/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;'})[m]);
+  }
+  function setLoading(show, text) {
+    DOM.loading.style.display = show ? "flex" : "none";
+    if(show && text) DOM.loading.querySelector("span").innerText = text;
+  }
+  function isValidYoutubeUrl(url) {
+    return /^(https?:\/\/)?(www\.)?(youtube\.com|youtu\.be)\/.+/.test(url);
+  }
+
+  // --- History (localStorage) ---
+  let urlHistory = [];
+  function loadHistory() {
+    try { urlHistory = JSON.parse(localStorage.getItem('ydrizz_history') || '[]'); } catch(e){ urlHistory = []; }
+    if(urlHistory.length > 5) urlHistory = urlHistory.slice(0,5);
+    renderHistory();
+  }
+  function addToHistory(url) {
+    urlHistory = [url, ...urlHistory.filter(u => u !== url)];
+    if(urlHistory.length > 5) urlHistory = urlHistory.slice(0,5);
+    localStorage.setItem('ydrizz_history', JSON.stringify(urlHistory));
+    renderHistory();
+  }
+  function clearHistory() {
+    urlHistory = [];
+    localStorage.removeItem('ydrizz_history');
+    renderHistory();
+  }
+  function renderHistory() {
+    if(urlHistory.length === 0) {
+      DOM.historyWrap.style.display = "none";
+      return;
+    }
+    DOM.historyWrap.style.display = "flex";
+    DOM.historyList.innerHTML = "";
+    urlHistory.forEach(url => {
+      const badge = document.createElement("div");
+      badge.className = "history-badge";
+      badge.textContent = url.length > 40 ? url.substring(0,35)+"..." : url;
+      badge.title = url;
+      badge.onclick = () => { DOM.urlInput.value = url; fetchInfo(); };
+      DOM.historyList.appendChild(badge);
+    });
+  }
+  DOM.clearHistoryBtn.onclick = clearHistory;
+
+  // --- Copy paste ---
+  DOM.pasteBtn.onclick = async () => {
+    try {
+      const text = await navigator.clipboard.readText();
+      if(text && isValidYoutubeUrl(text)) DOM.urlInput.value = text;
+      else showToast("error", "Gagal", "Clipboard tidak berisi URL YouTube.");
+    } catch(e) { showToast("error", "Izin clipboard", "Beri izin akses clipboard."); }
+  };
+
+  // --- Fetch video info ---
+  async function fetchInfo() {
+    const url = DOM.urlInput.value.trim();
+    if(!url) { showToast("error","URL kosong","Masukkan URL YouTube."); return; }
+    if(!isValidYoutubeUrl(url)) { showToast("error","URL tidak valid","Harus URL YouTube."); return; }
+
+    DOM.videoCard.style.display = "none";
+    DOM.formatSection.style.display = "none";
+    DOM.toast.style.display = "none";
+    selectedFormatId = null;
+    DOM.downloadBtn.disabled = true;
+    DOM.downloadBtn.innerHTML = "⬇ Pilih format terlebih dahulu";
+    DOM.fetchBtn.disabled = true;
+    setLoading(true, "Mengambil info video...");
+
+    try {
+      const res = await fetch(`/info?url=${encodeURIComponent(url)}`);
+      const data = await res.json();
+      if(data.error) throw new Error(data.error);
+      
+      // Update UI video card (safe text)
+      DOM.thumb.src = data.thumbnail || "";
+      DOM.videoTitle.textContent = data.title || "Unknown";
+      DOM.videoSub.textContent = `${data.channel || "?"} · ${data.view_count || "0"} views · ${data.duration || "N/A"}`;
+      DOM.duration.textContent = data.duration || "00:00";
+      DOM.videoCard.style.display = "block";
+      currentVideoUrl = url;
+
+      // Tampilkan peringatan FFmpeg dari server
+      if(data.ffmpeg === false) {
+        ffmpegAvailable = false;
+        DOM.ffmpegWarning.style.display = "block";
+      } else {
+        ffmpegAvailable = true;
+        DOM.ffmpegWarning.style.display = "none";
+      }
+
+      buildFormatGroups(data.formats);
+      DOM.formatSection.style.display = "block";
+
+      // Auto-select best combined format (1080p > 720p > 480p ...)
+      autoSelectBestFormat(data.formats);
+
+      addToHistory(url);
+    } catch(err) {
+      showToast("error", "Gagal memuat video", err.message);
+      DOM.formatSection.style.display = "none";
+    } finally {
+      setLoading(false);
+      DOM.fetchBtn.disabled = false;
+    }
+  }
+
+  function buildFormatGroups(formats) {
+    // Bersihkan grid
+    DOM.combinedGrid.innerHTML = "";
+    DOM.videoOnlyGrid.innerHTML = "";
+    DOM.audioGrid.innerHTML = "";
+    let hasCombined = false, hasVideoOnly = false, hasAudio = false;
+
+    formats.forEach(f => {
+      const btn = document.createElement("button");
+      btn.className = "fmt-btn";
+      btn.textContent = f.label;
+      btn.dataset.id = f.id;
+      btn.dataset.type = f.type;
+      btn.onclick = () => selectFormat(btn, f.id);
+      if(f.type === "combined") {
+        DOM.combinedGrid.appendChild(btn);
+        hasCombined = true;
+      } else if(f.type === "video_only") {
+        DOM.videoOnlyGrid.appendChild(btn);
+        hasVideoOnly = true;
+      } else if(f.type === "audio") {
+        DOM.audioGrid.appendChild(btn);
+        hasAudio = true;
+      }
+    });
+    DOM.combinedGroup.style.display = hasCombined ? "block" : "none";
+    DOM.videoOnlyGroup.style.display = hasVideoOnly ? "block" : "none";
+    DOM.audioGroup.style.display = hasAudio ? "block" : "none";
+  }
+
+  function selectFormat(btn, formatId) {
+    document.querySelectorAll(".fmt-btn").forEach(b => b.classList.remove("selected"));
+    btn.classList.add("selected");
+    selectedFormatId = formatId;
+    DOM.downloadBtn.disabled = false;
+    DOM.downloadBtn.innerHTML = `⬇ Download ${btn.textContent}`;
+  }
+
+  function autoSelectBestFormat(formats) {
+    // Prioritas: combined tertinggi (1080p > 720p > 480p > 360p > 240p > 144p)
+    const combined = formats.filter(f => f.type === "combined");
+    if(combined.length === 0) return;
+    const order = [2160,1440,1080,720,480,360,240,144];
+    let best = null;
+    for(let res of order) {
+      best = combined.find(f => f.label.includes(`${res}p`));
+      if(best) break;
+    }
+    if(!best) best = combined[0];
+    const targetBtn = Array.from(document.querySelectorAll(".fmt-btn")).find(btn => btn.dataset.id === best.id);
+    if(targetBtn) selectFormat(targetBtn, best.id);
+  }
+
+  // --- Download ---
+  async function startDownload() {
+    if(!selectedFormatId || !currentVideoUrl) return;
+    DOM.downloadBtn.disabled = true;
+    const originalText = DOM.downloadBtn.innerHTML;
+    DOM.downloadBtn.innerHTML = `<div class="spinner" style="width:16px;height:16px;"></div> Memproses...`;
+    setLoading(true, "Mendownload, harap tunggu...");
+    try {
+      const res = await fetch("/download", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ url: currentVideoUrl, format_id: selectedFormatId })
+      });
+      if(!res.ok) {
+        const errData = await res.json();
+        throw new Error(errData.error || `HTTP ${res.status}`);
+      }
+      const disposition = res.headers.get("Content-Disposition");
+      let filename = "download.mp4";
+      if(disposition && disposition.includes("filename=")) {
+        const match = disposition.match(/filename[^;=\n]*=((['"]).*?\2|[^;\n]*)/);
+        if(match && match[1]) filename = match[1].replace(/['"]/g, '');
+      }
+      const blob = await res.blob();
+      const blobUrl = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = blobUrl;
+      a.download = filename;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(blobUrl);
+      showToast("success", "✅ Download selesai!", `${filename} tersimpan.`);
+    } catch(err) {
+      showToast("error", "Download gagal", err.message);
+    } finally {
+      setLoading(false);
+      DOM.downloadBtn.disabled = false;
+      DOM.downloadBtn.innerHTML = originalText;
+    }
+  }
+
+  // Event binding
+  DOM.fetchBtn.onclick = fetchInfo;
+  DOM.urlInput.addEventListener("keydown", (e) => { if(e.key === "Enter") fetchInfo(); });
+  DOM.downloadBtn.onclick = startDownload;
+
+  // Inisialisasi
+  loadHistory();
+</script>
+</body>
+</html>
