@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+  <title>Timbangan Digital - Green App</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: system-ui, sans-serif; background: #f5f7fb; padding: 1rem; }
+    .container { max-width: 600px; margin: 0 auto; }
+    .card { background: white; border-radius: 1.5rem; padding: 1.5rem; margin-bottom: 1rem; text-align: center; }
+    .weight-display { font-size: 4rem; font-weight: 800; color: #0FBA68; margin: 1rem 0; }
+    .btn-group button { font-size: 1.5rem; width: 60px; height: 60px; border-radius: 9999px; background: #e5e7eb; border: none; margin: 0 0.5rem; cursor: pointer; }
+    .btn-submit { background: #0FBA68; color: white; padding: 1rem; border-radius: 9999px; width: 100%; font-weight: bold; border: none; margin-top: 1rem; cursor: pointer; min-height: 48px; }
+  </style>
+</head>
+<body>
+<div class="container">
+  <div class="card">
+    <h2>⚖️ Timbangan Digital</h2>
+    <p>Masukkan berat aktual sampah</p>
+    <div class="weight-display" id="weightValue">1.0</div>
+    <div class="btn-group">
+      <button onclick="changeWeight(-0.5)">-</button>
+      <button onclick="changeWeight(0.5)">+</button>
+    </div>
+    <div style="margin: 1rem 0;">
+      <button onclick="setWeight(1)">1 kg</button>
+      <button onclick="setWeight(2)">2 kg</button>
+      <button onclick="setWeight(5)">5 kg</button>
+    </div>
+    <button class="btn-submit" onclick="submitWeight()">✅ Konfirmasi & Selesai</button>
+  </div>
+</div>
+<script>
+  let currentWeight = 1.0;
+  const urlParams = new URLSearchParams(window.location.search);
+  const orderId = urlParams.get('orderId');
+  
+  function updateDisplay() {
+    document.getElementById('weightValue').innerText = currentWeight.toFixed(1);
+  }
+  function changeWeight(delta) {
+    currentWeight = Math.min(100, Math.max(0.1, currentWeight + delta));
+    updateDisplay();
+  }
+  function setWeight(w) {
+    currentWeight = w;
+    updateDisplay();
+  }
+  function submitWeight() {
+    if (!orderId || orderId === 'dummy') {
+      alert('Demo: Berat dicatat ' + currentWeight + ' kg. (Tidak ada order nyata)');
+      window.location.href = 'dashboard-courier.html';
+      return;
+    }
+    let orders = JSON.parse(localStorage.getItem('greenapp_orders')) || [];
+    const index = orders.findIndex(o => o.id === orderId);
+    if (index !== -1) {
+      orders[index].actualWeight = currentWeight;
+      orders[index].status = 'completed';
+      // hitung poin: organik 10, anorganik 20, elektronik 50 per kg
+      let pointsPerKg = orders[index].category === 'organic' ? 10 : orders[index].category === 'inorganic' ? 20 : 50;
+      orders[index].pointsEarned = Math.floor(currentWeight * pointsPerKg);
+      localStorage.setItem('greenapp_orders', JSON.stringify(orders));
+      
+      // update poin user
+      let user = JSON.parse(localStorage.getItem('greenapp_user')) || {};
+      user.points = (user.points || 0) + orders[index].pointsEarned;
+      localStorage.setItem('greenapp_user', JSON.stringify(user));
+      
+      alert(`Berat ${currentWeight} kg tercatat! +${orders[index].pointsEarned} poin.`);
+      window.location.href = 'dashboard-courier.html';
+    } else {
+      alert('Order tidak valid');
+    }
+  }
+  updateDisplay();
+</script>
+</body>
+</html>

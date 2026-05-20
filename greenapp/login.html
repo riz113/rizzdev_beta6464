@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+  <title>Masuk ke Green App</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+      background: linear-gradient(135deg, #f0fdf4 0%, #ffffff 100%);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1.5rem;
+    }
+    .login-card {
+      max-width: 440px;
+      width: 100%;
+      background: white;
+      border-radius: 2rem;
+      padding: 2rem 1.75rem;
+      box-shadow: 0 20px 35px -10px rgba(0,0,0,0.1);
+      border: 1px solid #e5e7eb;
+    }
+    .logo {
+      font-size: 2rem;
+      font-weight: 800;
+      color: #0FBA68;
+      text-align: center;
+      display: block;
+      margin-bottom: 0.5rem;
+      text-decoration: none;
+    }
+    h1 { font-size: 1.75rem; text-align: center; margin-bottom: 0.25rem; }
+    .sub { text-align: center; color: #6b7280; margin-bottom: 2rem; font-size: 0.9rem; }
+    .input-group { margin-bottom: 1.25rem; }
+    label { display: block; font-weight: 500; margin-bottom: 0.5rem; color: #1f2937; }
+    input {
+      width: 100%;
+      padding: 0.85rem 1rem;
+      border: 1px solid #d1d5db;
+      border-radius: 1rem;
+      font-size: 1rem;
+      transition: all 0.2s;
+      font-family: inherit;
+    }
+    input:focus {
+      outline: none;
+      border-color: #0FBA68;
+      box-shadow: 0 0 0 3px rgba(15,186,104,0.2);
+    }
+    .btn-login {
+      width: 100%;
+      background-color: #0FBA68;
+      color: white;
+      border: none;
+      padding: 0.85rem;
+      border-radius: 9999px;
+      font-weight: 700;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background 0.2s;
+      margin-top: 0.5rem;
+      min-height: 48px;
+    }
+    .btn-login:hover { background-color: #059669; }
+    .extra-links { display: flex; justify-content: space-between; margin-top: 1.5rem; font-size: 0.85rem; }
+    .extra-links a { color: #0FBA68; text-decoration: none; }
+    .extra-links a:hover { text-decoration: underline; }
+    .register-link { text-align: center; margin-top: 1.5rem; padding-top: 1rem; border-top: 1px solid #e5e7eb; }
+    .register-link a { color: #0FBA68; font-weight: 600; text-decoration: none; }
+    .error-msg { color: #dc2626; font-size: 0.8rem; margin-top: 0.25rem; display: none; }
+  </style>
+</head>
+<body>
+<div class="login-card">
+  <a href="index.html" class="logo">🌿 GreenApp</a>
+  <h1>Masuk</h1>
+  <p class="sub">Lanjutkan perjalanan hijau Anda</p>
+  <form id="loginForm">
+    <div class="input-group">
+      <label for="email">Email</label>
+      <input type="email" id="email" placeholder="contoh@email.com" required autocomplete="email">
+      <div class="error-msg" id="emailError">Email tidak valid</div>
+    </div>
+    <div class="input-group">
+      <label for="password">Kata Sandi</label>
+      <input type="password" id="password" placeholder="********" required autocomplete="current-password">
+      <div class="error-msg" id="passError">Kata sandi minimal 6 karakter</div>
+    </div>
+    <button type="submit" class="btn-login">Masuk</button>
+  </form>
+  <div class="extra-links">
+    <a href="#">Lupa kata sandi?</a>
+    <a href="register.html">Belum punya akun?</a>
+  </div>
+  <div class="register-link">
+    <p>Atau <a href="register.html">daftar sekarang</a> gratis</p>
+  </div>
+</div>
+<script>
+  const form = document.getElementById('loginForm');
+  const emailInput = document.getElementById('email');
+  const passwordInput = document.getElementById('password');
+  const emailError = document.getElementById('emailError');
+  const passError = document.getElementById('passError');
+
+  // Data pengguna simulasi (bisa didaftarkan via register.html)
+  // Untuk demo, jika belum ada user di localStorage, kita buat default
+  function initDefaultUsers() {
+    let users = JSON.parse(localStorage.getItem('greenapp_users'));
+    if (!users) {
+      users = [
+        { id: '1', email: 'warga@greenapp.com', password: 'warga123', name: 'Budi Warga', role: 'resident', points: 1250, phone: '081234567890', address: 'Jl. Merdeka No. 10' },
+        { id: '2', email: 'kurir@greenapp.com', password: 'kurir123', name: 'Agus Kurir', role: 'courier', points: 0, phone: '081298765432', address: 'Pool Kurir' }
+      ];
+      localStorage.setItem('greenapp_users', JSON.stringify(users));
+    }
+  }
+  initDefaultUsers();
+
+  form.addEventListener('submit', (e) => {
+    e.preventDefault();
+    let isValid = true;
+    const email = emailInput.value.trim();
+    const password = passwordInput.value;
+
+    const emailPattern = /^[^\s@]+@([^\s@.,]+\.)+[^\s@.,]{2,}$/;
+    if (!emailPattern.test(email)) {
+      emailError.style.display = 'block';
+      isValid = false;
+    } else {
+      emailError.style.display = 'none';
+    }
+
+    if (password.length < 6) {
+      passError.style.display = 'block';
+      isValid = false;
+    } else {
+      passError.style.display = 'none';
+    }
+
+    if (isValid) {
+      const users = JSON.parse(localStorage.getItem('greenapp_users'));
+      const user = users.find(u => u.email === email && u.password === password);
+      if (!user) {
+        alert('Email atau kata sandi salah. Gunakan warga@greenapp.com / warga123 atau kurir@greenapp.com / kurir123');
+        return;
+      }
+      // Simpan user yang login (tanpa password)
+      const loggedUser = { ...user };
+      delete loggedUser.password;
+      localStorage.setItem('greenapp_user', JSON.stringify(loggedUser));
+      
+      // Arahkan sesuai role
+      if (user.role === 'resident') {
+        window.location.href = 'dashboard-user.html';
+      } else {
+        window.location.href = 'dashboard-courier.html';
+      }
+    }
+  });
+</script>
+</body>
+</html>

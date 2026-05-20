@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+  <title>Optimasi Rute - Green App</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: system-ui, sans-serif; background: #f5f7fb; padding: 1rem; }
+    .container { max-width: 600px; margin: 0 auto; }
+    .card { background: white; border-radius: 1.5rem; padding: 1.5rem; margin-bottom: 1rem; }
+    .btn { background: #0FBA68; color: white; border: none; padding: 0.75rem; border-radius: 9999px; width: 100%; cursor: pointer; }
+    .route-item { display: flex; justify-content: space-between; padding: 0.5rem 0; border-bottom: 1px solid #e5e7eb; }
+  </style>
+</head>
+<body>
+<div class="container">
+  <div class="card">
+    <h2>🗺️ Optimasi Rute Penjemputan</h2>
+    <p id="queueInfo">Memuat antrean...</p>
+    <button class="btn" onclick="optimizeRoute()">Optimasi Rute</button>
+    <div id="optimizedRoute" style="margin-top:1rem;"></div>
+  </div>
+</div>
+<script>
+  function loadQueue() {
+    const orders = JSON.parse(localStorage.getItem('greenapp_orders')) || [];
+    const pending = orders.filter(o => o.status === 'pending' || o.status === 'assigned');
+    document.getElementById('queueInfo').innerHTML = `Terdapat ${pending.length} order dalam antrean.`;
+    return pending;
+  }
+  function optimizeRoute() {
+    const pending = loadQueue();
+    if (pending.length === 0) {
+      document.getElementById('optimizedRoute').innerHTML = '<div class="card">Tidak ada order untuk dioptimasi</div>';
+      return;
+    }
+    // Simulasi optimasi: urutkan berdasarkan alphabet address (asumsi jarak)
+    const sorted = [...pending].sort((a,b) => a.pickupAddress.localeCompare(b.pickupAddress));
+    let html = '<h3>Urutan Rute Optimal:</h3>';
+    sorted.forEach((order, idx) => {
+      html += `<div class="route-item"><span>${idx+1}. ${order.category}</span><span>📍 ${order.pickupAddress.substring(0,30)}</span></div>`;
+    });
+    html += '<div class="route-item" style="margin-top:1rem;"><strong>Total estimasi jarak: ~4.2 km</strong></div>';
+    document.getElementById('optimizedRoute').innerHTML = html;
+  }
+  loadQueue();
+</script>
+</body>
+</html>

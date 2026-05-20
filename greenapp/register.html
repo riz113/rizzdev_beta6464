@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+  <title>Daftar Green App</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+      background: linear-gradient(135deg, #f0fdf4 0%, #ffffff 100%);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1.5rem;
+    }
+    .register-card {
+      max-width: 500px;
+      width: 100%;
+      background: white;
+      border-radius: 2rem;
+      padding: 2rem;
+      box-shadow: 0 20px 35px -10px rgba(0,0,0,0.1);
+      border: 1px solid #e5e7eb;
+    }
+    .logo {
+      font-size: 2rem;
+      font-weight: 800;
+      color: #0FBA68;
+      text-align: center;
+      display: block;
+      margin-bottom: 0.5rem;
+      text-decoration: none;
+    }
+    h1 { font-size: 1.75rem; text-align: center; margin-bottom: 0.25rem; }
+    .sub { text-align: center; color: #6b7280; margin-bottom: 1.5rem; font-size: 0.9rem; }
+    .input-group { margin-bottom: 1rem; }
+    label { display: block; font-weight: 500; margin-bottom: 0.4rem; color: #1f2937; }
+    input, select {
+      width: 100%;
+      padding: 0.8rem 1rem;
+      border: 1px solid #d1d5db;
+      border-radius: 1rem;
+      font-size: 1rem;
+      font-family: inherit;
+    }
+    input:focus, select:focus {
+      outline: none;
+      border-color: #0FBA68;
+      box-shadow: 0 0 0 3px rgba(15,186,104,0.2);
+    }
+    .btn-register {
+      width: 100%;
+      background-color: #0FBA68;
+      color: white;
+      border: none;
+      padding: 0.85rem;
+      border-radius: 9999px;
+      font-weight: 700;
+      font-size: 1rem;
+      cursor: pointer;
+      margin-top: 1rem;
+      min-height: 48px;
+    }
+    .btn-register:hover { background-color: #059669; }
+    .login-link { text-align: center; margin-top: 1.5rem; padding-top: 1rem; border-top: 1px solid #e5e7eb; }
+    .login-link a { color: #0FBA68; font-weight: 600; text-decoration: none; }
+    .error-msg { color: #dc2626; font-size: 0.75rem; margin-top: 0.25rem; display: none; }
+    .row-2col { display: flex; gap: 1rem; }
+    .row-2col .input-group { flex: 1; }
+    @media (max-width: 480px) { .row-2col { flex-direction: column; gap: 0; } }
+  </style>
+</head>
+<body>
+<div class="register-card">
+  <a href="index.html" class="logo">🌿 GreenApp</a>
+  <h1>Daftar Akun</h1>
+  <p class="sub">Mulai kurangi sampah dan dapatkan poin</p>
+  <form id="registerForm">
+    <div class="row-2col">
+      <div class="input-group">
+        <label>Nama Lengkap</label>
+        <input type="text" id="fullname" placeholder="Budi Santoso" required>
+        <div class="error-msg" id="nameError">Nama minimal 2 karakter</div>
+      </div>
+      <div class="input-group">
+        <label>Nomor HP</label>
+        <input type="tel" id="phone" placeholder="081234567890" required>
+        <div class="error-msg" id="phoneError">Nomor tidak valid (10-13 digit)</div>
+      </div>
+    </div>
+    <div class="input-group">
+      <label>Email</label>
+      <input type="email" id="email" placeholder="contoh@email.com" required>
+      <div class="error-msg" id="emailError">Email tidak valid</div>
+    </div>
+    <div class="input-group">
+      <label>Kata Sandi</label>
+      <input type="password" id="password" placeholder="Minimal 6 karakter" required>
+      <div class="error-msg" id="passError">Kata sandi minimal 6 karakter</div>
+    </div>
+    <div class="input-group">
+      <label>Konfirmasi Kata Sandi</label>
+      <input type="password" id="confirmPassword" placeholder="Ulangi kata sandi" required>
+      <div class="error-msg" id="confirmError">Kata sandi tidak cocok</div>
+    </div>
+    <div class="input-group">
+      <label>Alamat Lengkap</label>
+      <input type="text" id="address" placeholder="Jl. Contoh No. 123, RT/RW..." required>
+      <div class="error-msg" id="addressError">Alamat wajib diisi</div>
+    </div>
+    <div class="input-group">
+      <label>Daftar sebagai</label>
+      <select id="role">
+        <option value="resident">Warga (ingin membuang sampah)</option>
+        <option value="courier">Kurir (mitra penjemput)</option>
+      </select>
+    </div>
+    <button type="submit" class="btn-register">Daftar Sekarang</button>
+  </form>
+  <div class="login-link">
+    <p>Sudah punya akun? <a href="login.html">Masuk di sini</a></p>
+  </div>
+</div>
+<script>
+  const form = document.getElementById('registerForm');
+  const fullname = document.getElementById('fullname');
+  const phone = document.getElementById('phone');
+  const email = document.getElementById('email');
+  const password = document.getElementById('password');
+  const confirm = document.getElementById('confirmPassword');
+  const address = document.getElementById('address');
+
+  const nameError = document.getElementById('nameError');
+  const phoneError = document.getElementById('phoneError');
+  const emailError = document.getElementById('emailError');
+  const passError = document.getElementById('passError');
+  const confirmError = document.getElementById('confirmError');
+  const addressError = document.getElementById('addressError');
+
+  form.addEventListener('submit', (e) => {
+    e.preventDefault();
+    let valid = true;
+
+    const nameVal = fullname.value.trim();
+    if (nameVal.length < 2) { nameError.style.display = 'block'; valid = false; } else { nameError.style.display = 'none'; }
+
+    const phoneVal = phone.value.trim();
+    const phoneRegex = /^[0-9]{10,13}$/;
+    if (!phoneRegex.test(phoneVal)) { phoneError.style.display = 'block'; valid = false; } else { phoneError.style.display = 'none'; }
+
+    const emailVal = email.value.trim();
+    const emailPattern = /^[^\s@]+@([^\s@.,]+\.)+[^\s@.,]{2,}$/;
+    if (!emailPattern.test(emailVal)) { emailError.style.display = 'block'; valid = false; } else { emailError.style.display = 'none'; }
+
+    const passVal = password.value;
+    if (passVal.length < 6) { passError.style.display = 'block'; valid = false; } else { passError.style.display = 'none'; }
+
+    const confirmVal = confirm.value;
+    if (confirmVal !== passVal) { confirmError.style.display = 'block'; valid = false; } else { confirmError.style.display = 'none'; }
+
+    const addressVal = address.value.trim();
+    if (addressVal === '') { addressError.style.display = 'block'; valid = false; } else { addressError.style.display = 'none'; }
+
+    if (valid) {
+      // Cek apakah email sudah terdaftar
+      let users = JSON.parse(localStorage.getItem('greenapp_users')) || [];
+      if (users.some(u => u.email === emailVal)) {
+        alert('Email sudah terdaftar. Silakan login.');
+        window.location.href = 'login.html';
+        return;
+      }
+      
+      const role = document.getElementById('role').value;
+      const newUser = {
+        id: Date.now().toString(),
+        name: nameVal,
+        email: emailVal,
+        password: passVal,
+        phone: phoneVal,
+        address: addressVal,
+        role: role,
+        points: 0
+      };
+      users.push(newUser);
+      localStorage.setItem('greenapp_users', JSON.stringify(users));
+      
+      alert(`Pendaftaran berhasil! Silakan login sebagai ${role === 'resident' ? 'Warga' : 'Kurir'}.`);
+      window.location.href = 'login.html';
+    }
+  });
+</script>
+</body>
+</html>

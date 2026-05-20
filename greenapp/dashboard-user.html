@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+  <title>Dashboard Warga - Green App</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+      background: #f5f7fb;
+      color: #1f2937;
+      padding-bottom: 80px;
+    }
+    .container { max-width: 600px; margin: 0 auto; padding: 1rem; }
+    .card { background: white; border-radius: 1.5rem; padding: 1.25rem; margin-bottom: 1rem; box-shadow: 0 2px 8px rgba(0,0,0,0.05); border: 1px solid #e5e7eb; }
+    .header { background: #0FBA68; color: white; padding: 1rem; border-radius: 0 0 1.5rem 1.5rem; margin-bottom: 1rem; }
+    .greeting { font-size: 1.25rem; font-weight: 600; }
+    .points { font-size: 2rem; font-weight: 800; }
+    .btn {
+      display: inline-block; background: #0FBA68; color: white; border: none;
+      padding: 0.75rem 1.5rem; border-radius: 9999px; font-weight: 600;
+      text-decoration: none; text-align: center; cursor: pointer;
+      min-height: 48px; min-width: 44px; transition: 0.2s;
+    }
+    .btn-outline { background: transparent; border: 2px solid #0FBA68; color: #0FBA68; }
+    .btn-large { width: 100%; padding: 1rem; font-size: 1.1rem; }
+    .flex-between { display: flex; justify-content: space-between; align-items: center; }
+    .status-badge { padding: 0.25rem 0.75rem; border-radius: 9999px; font-size: 0.75rem; background: #fef3c7; color: #b45309; }
+    .bottom-nav {
+      position: fixed; bottom: 0; left: 0; right: 0;
+      background: white; display: flex; justify-content: space-around;
+      padding: 0.75rem 1rem; border-top: 1px solid #e5e7eb;
+      max-width: 600px; margin: 0 auto;
+    }
+    .bottom-nav a { text-align: center; color: #6b7280; text-decoration: none; font-size: 0.75rem; }
+    .bottom-nav .active { color: #0FBA68; }
+  </style>
+</head>
+<body>
+<div class="container">
+  <div class="header">
+    <div class="greeting">Halo, <span id="userName">Warga</span> 👋</div>
+    <div class="flex-between" style="margin-top: 0.5rem;">
+      <span>Total Poin</span>
+      <span class="points" id="totalPoints">0</span>
+    </div>
+  </div>
+
+  <a href="request-pickup.html" class="btn btn-large" style="margin-bottom: 1rem; display: block;">➕ Request Penjemputan Baru</a>
+
+  <div class="card">
+    <div class="flex-between"><strong>Penjemputan Aktif</strong><a href="history.html" style="color:#0FBA68;">Lihat semua</a></div>
+    <div id="activeOrders">Tidak ada penjemputan aktif</div>
+  </div>
+
+  <div class="card">
+    <div class="flex-between"><strong>Riwayat Terakhir</strong></div>
+    <div id="recentHistory">-</div>
+  </div>
+</div>
+<div class="bottom-nav">
+  <a href="dashboard-user.html" class="active">🏠 Beranda</a>
+  <a href="history.html">📋 Riwayat</a>
+  <a href="profile.html">👤 Profil</a>
+</div>
+<script>
+  function loadUser() {
+    let user = JSON.parse(localStorage.getItem('greenapp_user'));
+    if (!user) {
+      user = { id: '1', name: 'Budi Santoso', email: 'budi@example.com', points: 1250, role: 'resident' };
+      localStorage.setItem('greenapp_user', JSON.stringify(user));
+    }
+    document.getElementById('userName').innerText = user.name.split(' ')[0];
+    document.getElementById('totalPoints').innerText = user.points;
+    return user;
+  }
+
+  function loadOrders() {
+    let orders = JSON.parse(localStorage.getItem('greenapp_orders')) || [];
+    const active = orders.filter(o => o.status !== 'completed' && o.status !== 'cancelled');
+    const activeDiv = document.getElementById('activeOrders');
+    if (active.length === 0) activeDiv.innerHTML = '<p style="color:#6b7280;">Tidak ada penjemputan aktif</p>';
+    else {
+      activeDiv.innerHTML = active.map(o => `
+        <div class="flex-between" style="margin-top: 8px;">
+          <span>${o.category === 'organic' ? 'Organik' : o.category === 'inorganic' ? 'Anorganik' : 'Elektronik'}</span>
+          <span>${o.estimatedWeight} kg</span>
+          <a href="tracking.html?id=${o.id}" style="color:#0FBA68;">Lacak →</a>
+        </div>
+      `).join('');
+    }
+
+    const completed = orders.filter(o => o.status === 'completed').slice(0, 3);
+    const historyDiv = document.getElementById('recentHistory');
+    if (completed.length === 0) historyDiv.innerHTML = '<p style="color:#6b7280;">Belum ada penjemputan selesai</p>';
+    else {
+      historyDiv.innerHTML = completed.map(o => `
+        <div class="flex-between" style="margin-top: 8px;">
+          <span>${o.category}</span>
+          <span>${o.actualWeight || o.estimatedWeight} kg</span>
+          <span style="color:#0FBA68;">+${o.pointsEarned || 0} poin</span>
+        </div>
+      `).join('');
+    }
+  }
+
+  loadUser();
+  loadOrders();
+</script>
+</body>
+</html>

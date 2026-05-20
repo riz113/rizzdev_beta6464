@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+  <title>Green App | Ubah Sampah Jadi Poin</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+      background: linear-gradient(135deg, #f0fdf4 0%, #ffffff 100%);
+      color: #1f2937;
+      line-height: 1.5;
+      scroll-behavior: smooth;
+    }
+    .container { max-width: 1280px; margin: 0 auto; padding: 0 1.5rem; }
+    h1, h2, h3 { font-weight: 700; line-height: 1.2; }
+    h1 { font-size: 2.5rem; letter-spacing: -0.02em; }
+    h2 { font-size: 2rem; margin-bottom: 1rem; }
+    @media (min-width: 768px) {
+      h1 { font-size: 3.5rem; }
+      h2 { font-size: 2.5rem; }
+    }
+    .btn {
+      display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem;
+      padding: 0.75rem 1.5rem; font-weight: 600; border-radius: 9999px;
+      transition: all 0.2s ease; cursor: pointer; text-decoration: none;
+      font-size: 1rem; min-height: 48px; min-width: 44px; border: none;
+    }
+    .btn-primary { background-color: #0FBA68; color: white; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1); }
+    .btn-primary:hover { background-color: #059669; transform: translateY(-2px); }
+    .btn-outline { background-color: transparent; border: 2px solid #0FBA68; color: #0FBA68; }
+    .btn-outline:hover { background-color: #0FBA68; color: white; }
+    .btn-large { padding: 1rem 2rem; font-size: 1.125rem; }
+    .navbar { display: flex; justify-content: space-between; align-items: center; padding: 1rem 0; flex-wrap: wrap; }
+    .logo { font-size: 1.75rem; font-weight: 800; color: #0FBA68; text-decoration: none; display: flex; align-items: center; gap: 0.25rem; }
+    .nav-links { display: flex; gap: 2rem; align-items: center; }
+    .nav-links a { text-decoration: none; color: #1f2937; font-weight: 500; transition: color 0.2s; }
+    .nav-links a:hover { color: #0FBA68; }
+    .mobile-menu-btn { display: none; background: none; border: none; font-size: 1.8rem; cursor: pointer; color: #0FBA68; }
+    @media (max-width: 768px) {
+      .nav-links { display: none; width: 100%; flex-direction: column; gap: 1rem; padding: 1rem 0; }
+      .nav-links.show { display: flex; }
+      .mobile-menu-btn { display: block; }
+      .navbar { flex-wrap: wrap; }
+    }
+    .hero { padding: 4rem 0 5rem; display: flex; align-items: center; gap: 3rem; flex-wrap: wrap; }
+    .hero-content { flex: 1; min-width: 280px; }
+    .hero-image { flex: 1; text-align: center; min-width: 280px; }
+    .badge { background-color: #d1fae5; color: #065f46; padding: 0.25rem 1rem; border-radius: 9999px; font-size: 0.875rem; font-weight: 600; display: inline-block; margin-bottom: 1rem; }
+    .card-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2rem; margin: 3rem 0; }
+    .card { background: white; padding: 1.75rem; border-radius: 1.5rem; box-shadow: 0 4px 20px rgba(0,0,0,0.05); transition: transform 0.2s; text-align: center; border: 1px solid #e5e7eb; }
+    .card:hover { transform: translateY(-5px); box-shadow: 0 20px 25px -5px rgba(0,0,0,0.1); }
+    .card-icon { font-size: 3rem; margin-bottom: 1rem; }
+    .steps { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 2rem; margin: 3rem 0; }
+    .step { flex: 1; text-align: center; min-width: 180px; }
+    .step-number { width: 56px; height: 56px; background-color: #0FBA68; color: white; border-radius: 9999px; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; font-weight: bold; margin: 0 auto 1rem; }
+    .cta-section { background: linear-gradient(120deg, #0FBA68, #059669); border-radius: 2rem; padding: 3rem 2rem; text-align: center; color: white; margin: 4rem 0; }
+    footer { background-color: #1f2937; color: #9ca3af; padding: 2rem 0; margin-top: 3rem; text-align: center; }
+    .text-center { text-align: center; }
+    .text-primary { color: #0FBA68; }
+  </style>
+</head>
+<body>
+<div class="container">
+  <nav class="navbar">
+    <a href="#" class="logo">🌿 GreenApp</a>
+    <button class="mobile-menu-btn" id="menuBtn" aria-label="Menu">☰</button>
+    <div class="nav-links" id="navLinks">
+      <a href="#fitur">Fitur</a>
+      <a href="#cara-kerja">Cara Kerja</a>
+      <a href="#tentang">Tentang</a>
+      <a href="login.html" class="btn btn-outline" style="padding: 0.5rem 1.2rem;">Masuk</a>
+      <a href="register.html" class="btn btn-primary" style="padding: 0.5rem 1.2rem;">Daftar</a>
+    </div>
+  </nav>
+  <section class="hero">
+    <div class="hero-content">
+      <div class="badge">✨ Ekonomi Sirkular #1</div>
+      <h1>Ubah sampah jadi <span class="text-primary">poin</span>,<br>jemput cepat, bumi sehat</h1>
+      <p style="font-size: 1.125rem; color: #4b5563; margin: 1.5rem 0 2rem;">Green App menghubungkan warga dengan kurir untuk penjemputan sampah organik, anorganik, dan elektronik. Dapatkan poin dan tukarkan dengan voucher!</p>
+      <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+        <a href="register.html" class="btn btn-primary btn-large">Mulai Sekarang →</a>
+        <a href="#fitur" class="btn btn-outline btn-large">Pelajari Lebih</a>
+      </div>
+    </div>
+    <div class="hero-image">
+      <svg viewBox="0 0 400 300" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect width="400" height="300" rx="20" fill="#D1FAE5" />
+        <circle cx="200" cy="130" r="50" fill="#0FBA68" fill-opacity="0.3" />
+        <circle cx="200" cy="130" r="30" fill="#0FBA68" />
+        <path d="M170 130 L190 150 L230 110" stroke="white" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" fill="none" />
+        <rect x="130" y="200" width="140" height="40" rx="10" fill="#059669" />
+        <text x="200" y="226" text-anchor="middle" fill="white" font-weight="bold">Recycle Now</text>
+        <circle cx="320" cy="240" r="20" fill="#F97316" />
+        <text x="320" y="246" text-anchor="middle" fill="white" font-size="14">♻️</text>
+      </svg>
+    </div>
+  </section>
+  <section id="fitur">
+    <h2 class="text-center">Fitur Unggulan</h2>
+    <p class="text-center" style="color: #6b7280; margin-bottom: 2rem;">Nikmati kemudahan pengelolaan sampah dari rumah</p>
+    <div class="card-grid">
+      <div class="card"><div class="card-icon">🚛</div><h3>Penjemputan Cepat</h3><p>Kurir datang dalam waktu kurang dari 30 menit. Real-time tracking hemat data.</p></div>
+      <div class="card"><div class="card-icon">🎁</div><h3>Kumpulkan Poin</h3><p>Setiap kg sampah bernilai poin. Tukarkan dengan voucher belanja.</p></div>
+      <div class="card"><div class="card-icon">📱</div><h3>Mudah untuk Semua</h3><p>Antarmuka sederhana dengan tombol besar dan panduan visual.</p></div>
+      <div class="card"><div class="card-icon">🗺️</div><h3>Optimasi Rute Kurir</h3><p>Kurir mendapat rute paling efisien, mengurangi emisi karbon.</p></div>
+    </div>
+  </section>
+  <section id="cara-kerja">
+    <h2 class="text-center">Cara Kerja Green App</h2>
+    <p class="text-center" style="color: #6b7280; margin-bottom: 2rem;">Hanya 4 langkah sederhana</p>
+    <div class="steps">
+      <div class="step"><div class="step-number">1</div><h3>Pilih Kategori</h3><p>Organik, anorganik, atau elektronik.</p></div>
+      <div class="step"><div class="step-number">2</div><h3>Jadwalkan</h3><p>Tentukan waktu penjemputan.</p></div>
+      <div class="step"><div class="step-number">3</div><h3>Kurir Datang</h3><p>Lacak kurir secara langsung.</p></div>
+      <div class="step"><div class="step-number">4</div><h3>Dapatkan Poin</h3><p>Setelah ditimbang, poin masuk ke akun.</p></div>
+    </div>
+  </section>
+  <div class="cta-section">
+    <h2>Siap menjadi bagian dari solusi?</h2>
+    <p style="margin-bottom: 1.5rem;">Gabung dengan ribuan warga yang sudah mengurangi sampah dan dapat poin.</p>
+    <a href="register.html" class="btn btn-outline btn-large" style="border-color: white; color: white;">Daftar Sekarang Gratis</a>
+  </div>
+  <footer>
+    <p>© 2026 Green App — Ekonomi Sirkular untuk Indonesia</p>
+    <p style="margin-top: 0.5rem;">🌱 #ZeroWaste #GreenApp</p>
+  </footer>
+</div>
+<script>
+  const menuBtn = document.getElementById('menuBtn');
+  const navLinks = document.getElementById('navLinks');
+  if(menuBtn) menuBtn.addEventListener('click', () => navLinks.classList.toggle('show'));
+  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function(e) {
+      const targetId = this.getAttribute('href');
+      if(targetId === '#') return;
+      const target = document.querySelector(targetId);
+      if(target) { e.preventDefault(); target.scrollIntoView({ behavior: 'smooth' }); if(navLinks.classList.contains('show')) navLinks.classList.remove('show'); }
+    });
+  });
+</script>
+</body>
+</html>

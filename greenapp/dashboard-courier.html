@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+  <title>Dashboard Kurir - Green App</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: system-ui, sans-serif; background: #f5f7fb; padding-bottom: 80px; }
+    .container { max-width: 600px; margin: 0 auto; padding: 1rem; }
+    .card { background: white; border-radius: 1.5rem; padding: 1.25rem; margin-bottom: 1rem; box-shadow: 0 2px 8px rgba(0,0,0,0.05); }
+    .header { background: #0FBA68; color: white; padding: 1rem; border-radius: 0 0 1.5rem 1.5rem; margin-bottom: 1rem; }
+    .btn { background: #0FBA68; color: white; border: none; padding: 0.75rem 1rem; border-radius: 9999px; font-weight: 600; text-decoration: none; display: inline-block; cursor: pointer; min-height: 44px; }
+    .btn-outline { background: transparent; border: 2px solid #0FBA68; color: #0FBA68; }
+    .flex-between { display: flex; justify-content: space-between; align-items: center; }
+    .order-card { border-left: 4px solid #0FBA68; margin-bottom: 0.75rem; padding: 0.75rem; background: #f9fafb; border-radius: 1rem; }
+    .bottom-nav { position: fixed; bottom: 0; left: 0; right: 0; background: white; display: flex; justify-content: space-around; padding: 0.75rem; max-width: 600px; margin: 0 auto; border-top: 1px solid #e5e7eb; }
+    .bottom-nav a { text-align: center; color: #6b7280; text-decoration: none; font-size: 0.75rem; }
+    .active { color: #0FBA68; }
+  </style>
+</head>
+<body>
+<div class="container">
+  <div class="header">
+    <div>📦 Dashboard Kurir</div>
+    <div id="courierName" style="font-weight:600;">Mas Agus</div>
+  </div>
+  <div class="flex-between" style="margin-bottom: 1rem;">
+    <a href="route-optimizer.html" class="btn">🗺️ Optimasi Rute</a>
+    <a href="scale-input.html?orderId=dummy" class="btn btn-outline">⚖️ Timbang</a>
+  </div>
+  <div class="card">
+    <div class="flex-between"><strong>Antrean Penjemputan</strong><span id="queueCount">0</span></div>
+    <div id="queueOrders">Memuat...</div>
+  </div>
+</div>
+<div class="bottom-nav">
+  <a href="dashboard-courier.html" class="active">🏠 Beranda</a>
+  <a href="route-optimizer.html">🗺️ Rute</a>
+  <a href="profile.html">👤 Profil</a>
+</div>
+<script>
+  function loadCourier() {
+    let user = JSON.parse(localStorage.getItem('greenapp_user'));
+    if (!user || user.role !== 'courier') {
+      user = { id: 'c1', name: 'Mas Agus', role: 'courier', points: 0 };
+      localStorage.setItem('greenapp_user', JSON.stringify(user));
+    }
+    document.getElementById('courierName').innerText = user.name;
+    return user;
+  }
+
+  function loadQueue() {
+    let orders = JSON.parse(localStorage.getItem('greenapp_orders')) || [];
+    const pending = orders.filter(o => o.status === 'pending' || o.status === 'assigned');
+    const queueDiv = document.getElementById('queueOrders');
+    document.getElementById('queueCount').innerText = pending.length;
+    if (pending.length === 0) queueDiv.innerHTML = '<p>Tidak ada antrean</p>';
+    else {
+      queueDiv.innerHTML = pending.map(o => `
+        <div class="order-card">
+          <div class="flex-between">
+            <span><strong>${o.category === 'organic' ? 'Organik' : o.category === 'inorganic' ? 'Anorganik' : 'Elektronik'}</strong></span>
+            <span>${o.estimatedWeight} kg</span>
+            <a href="scale-input.html?orderId=${o.id}" class="btn" style="padding:0.3rem 0.8rem;">Ambil</a>
+          </div>
+          <div style="font-size:0.75rem; color:#6b7280;">📍 ${o.pickupAddress.substring(0, 40)}</div>
+        </div>
+      `).join('');
+    }
+  }
+
+  loadCourier();
+  loadQueue();
+</script>
+</body>
+</html>

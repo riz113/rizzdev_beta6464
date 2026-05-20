@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+  <title>Lacak Penjemputan - Green App</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: system-ui, sans-serif; background: #f5f7fb; padding: 1rem; }
+    .container { max-width: 600px; margin: 0 auto; }
+    .card { background: white; border-radius: 1.5rem; padding: 1.5rem; margin-bottom: 1rem; }
+    .progress-step { display: flex; justify-content: space-between; margin: 1rem 0; }
+    .step { text-align: center; flex:1; font-size:0.7rem; color:#9ca3af; }
+    .step.active { color:#0FBA68; font-weight: bold; }
+    .btn { background: #0FBA68; color: white; border: none; padding: 0.75rem; border-radius: 9999px; width: 100%; cursor: pointer; }
+  </style>
+</head>
+<body>
+<div class="container">
+  <div class="card">
+    <h2>📍 Lacak Penjemputan</h2>
+    <div id="orderInfo">Memuat...</div>
+    <div class="progress-step" id="progressSteps"></div>
+    <div id="etaInfo" style="margin:1rem 0; background:#e6f7ec; padding:0.75rem; border-radius:1rem;"></div>
+    <button class="btn" onclick="window.location.href='dashboard-user.html'">Kembali ke Dashboard</button>
+  </div>
+</div>
+<script>
+  const urlParams = new URLSearchParams(window.location.search);
+  const orderId = urlParams.get('id');
+  
+  function loadTracking() {
+    const orders = JSON.parse(localStorage.getItem('greenapp_orders')) || [];
+    const order = orders.find(o => o.id === orderId);
+    if (!order) {
+      document.getElementById('orderInfo').innerHTML = '<p>Order tidak ditemukan</p>';
+      return;
+    }
+    const status = order.status || 'pending';
+    const steps = ['pending', 'assigned', 'picked_up', 'weighed', 'completed'];
+    const stepNames = ['Menunggu Kurir', 'Kurir Ditugaskan', 'Sampah Diambil', 'Ditimbang', 'Selesai'];
+    const currentIdx = steps.indexOf(status);
+    
+    let stepsHtml = '';
+    stepNames.forEach((name, idx) => {
+      let activeClass = idx <= currentIdx ? 'active' : '';
+      stepsHtml += `<div class="step ${activeClass}">${name}<br>${idx <= currentIdx ? '✓' : '○'}</div>`;
+    });
+    document.getElementById('progressSteps').innerHTML = stepsHtml;
+    
+    let etaText = '';
+    if (status === 'pending') etaText = '⏳ Menunggu kurir tersedia...';
+    else if (status === 'assigned') etaText = '🚚 Kurir sedang menuju lokasi Anda (estimasi 15-20 menit)';
+    else if (status === 'picked_up') etaText = '📦 Sampah sudah diambil, sedang dalam perjalanan ke pusat daur ulang';
+    else if (status === 'weighed') etaText = '⚖️ Sedang ditimbang, poin akan segera masuk';
+    else if (status === 'completed') etaText = '✅ Selesai! Terima kasih telah berkontribusi.';
+    document.getElementById('etaInfo').innerHTML = etaText;
+    
+    document.getElementById('orderInfo').innerHTML = `
+      <p><strong>ID Order:</strong> ${order.id.slice(-6)}</p>
+      <p><strong>Kategori:</strong> ${order.category}</p>
+      <p><strong>Berat estimasi:</strong> ${order.estimatedWeight} kg</p>
+      <p><strong>Alamat:</strong> ${order.pickupAddress}</p>
+    `;
+  }
+  loadTracking();
+</script>
+</body>
+</html>

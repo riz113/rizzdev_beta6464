@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+  <title>Profil - Green App</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: system-ui, sans-serif; background: #f5f7fb; padding: 1rem; padding-bottom: 80px; }
+    .container { max-width: 600px; margin: 0 auto; }
+    .card { background: white; border-radius: 1.5rem; padding: 1.5rem; margin-bottom: 1rem; }
+    .btn { background: #0FBA68; color: white; border: none; padding: 0.75rem; border-radius: 9999px; width: 100%; margin-top: 1rem; cursor: pointer; }
+    .btn-outline { background: transparent; border: 1px solid #dc2626; color: #dc2626; }
+    input, textarea { width: 100%; padding: 0.75rem; border: 1px solid #d1d5db; border-radius: 1rem; margin-top: 0.25rem; margin-bottom: 1rem; }
+  </style>
+</head>
+<body>
+<div class="container">
+  <div class="card">
+    <h2>👤 Profil Saya</h2>
+    <label>Nama Lengkap</label>
+    <input type="text" id="name" placeholder="Nama">
+    <label>Email</label>
+    <input type="email" id="email" placeholder="Email">
+    <label>Nomor HP</label>
+    <input type="tel" id="phone" placeholder="081234567890">
+    <label>Alamat</label>
+    <textarea id="address" rows="2"></textarea>
+    <button class="btn" onclick="saveProfile()">Simpan Perubahan</button>
+    <button class="btn btn-outline" onclick="logout()">Keluar</button>
+  </div>
+</div>
+<script>
+  let user = JSON.parse(localStorage.getItem('greenapp_user')) || { name: 'Warga', email: 'warga@example.com', phone: '081234567890', address: 'Jl. Merdeka No. 10' };
+  document.getElementById('name').value = user.name || '';
+  document.getElementById('email').value = user.email || '';
+  document.getElementById('phone').value = user.phone || '';
+  document.getElementById('address').value = user.address || '';
+  
+  function saveProfile() {
+    user.name = document.getElementById('name').value;
+    user.email = document.getElementById('email').value;
+    user.phone = document.getElementById('phone').value;
+    user.address = document.getElementById('address').value;
+    localStorage.setItem('greenapp_user', JSON.stringify(user));
+    alert('Profil disimpan');
+    window.location.reload();
+  }
+  function logout() {
+    localStorage.removeItem('greenapp_user');
+    localStorage.removeItem('greenapp_orders');
+    window.location.href = 'login.html';
+  }
+</script>
+</body>
+</html>
