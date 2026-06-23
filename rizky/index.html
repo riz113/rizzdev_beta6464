@@ -1,0 +1,2204 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+
+    <!-- ==========================================
+        Portfolio Website
+        Rizky Adimuti
+        IMK Project 2026
+    =========================================== -->
+
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0">
+
+    <!-- SEO -->
+
+    <title>Rizky Adimuti | Portfolio</title>
+
+    <meta name="description"
+        content="Portfolio Rizky Adimuti, Mahasiswa Teknik Komputer Universitas Wiralodra yang berfokus pada IoT, Artificial Intelligence, Web Development dan Embedded System.">
+
+    <meta name="keywords"
+        content="Portfolio,Rizky Adimuti,IoT,Arduino,ESP32,Raspberry Pi,Artificial Intelligence">
+
+    <meta name="author"
+        content="Rizky Adimuti">
+
+    <!-- Open Graph -->
+
+    <meta property="og:title"
+        content="Rizky Adimuti Portfolio">
+
+    <meta property="og:image"
+        content="assets/images/profile.png">
+
+    <meta property="og:type"
+        content="website">
+
+    <!-- Favicon -->
+
+    <link rel="icon"
+        href="assets/images/logo.png">
+
+    <!-- Google Font -->
+
+    <link rel="preconnect"
+        href="https://fonts.googleapis.com">
+
+    <link rel="preconnect"
+        href="https://fonts.gstatic.com"
+        crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+
+    <!-- Font Awesome -->
+
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
+    <!-- AOS -->
+
+    <link rel="stylesheet"
+        href="https://unpkg.com/aos@2.3.4/dist/aos.css">
+
+    <!-- CSS -->
+
+    <link rel="stylesheet"
+        href="style.css">
+
+</head>
+
+<body>
+
+    <!--====================================
+            LOADING SCREEN
+    =====================================-->
+
+    <div id="loading">
+
+        <div class="loading-box">
+
+            <img src="assets/images/logo.png"
+                alt="Logo">
+
+            <h1>Rizky Adimuti</h1>
+
+            <p>Loading Portfolio...</p>
+
+            <div class="loading-bar">
+
+                <span></span>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!--====================================
+            CUSTOM CURSOR
+    =====================================-->
+
+    <div class="cursor-dot"></div>
+
+    <div class="cursor-outline"></div>
+
+    <!--====================================
+            PARTICLE BACKGROUND
+    =====================================-->
+
+    <div id="particles-js"></div>
+
+    <!--====================================
+            HEADER
+    =====================================-->
+
+    <header id="header">
+
+        <div class="container">
+
+            <nav class="navbar">
+
+                <!-- Logo -->
+
+                <a href="#home"
+                    class="logo">
+
+                    <img src="assets/images/logo.png"
+                        alt="Logo">
+
+                    <span>Rizky Adimuti</span>
+
+                </a>
+
+                <!-- Menu -->
+
+                <ul class="nav-menu">
+
+                    <li>
+
+                        <a href="#home"
+                            data-lang-id="Beranda"
+                            data-lang-en="Home">
+
+                            Beranda
+
+                        </a>
+
+                    </li>
+
+                    <li>
+
+                        <a href="#about"
+                            data-lang-id="Tentang"
+                            data-lang-en="About">
+
+                            Tentang
+
+                        </a>
+
+                    </li>
+
+                    <li>
+
+                        <a href="#skills"
+                            data-lang-id="Skill"
+                            data-lang-en="Skills">
+
+                            Skill
+
+                        </a>
+
+                    </li>
+
+                    <li>
+
+                        <a href="#projects"
+                            data-lang-id="Project"
+                            data-lang-en="Projects">
+
+                            Project
+
+                        </a>
+
+                    </li>
+
+                    <li>
+
+                        <a href="#experience"
+                            data-lang-id="Pengalaman"
+                            data-lang-en="Experience">
+
+                            Pengalaman
+
+                        </a>
+
+                    </li>
+
+                    <li>
+
+                        <a href="#contact"
+                            data-lang-id="Kontak"
+                            data-lang-en="Contact">
+
+                            Kontak
+
+                        </a>
+
+                    </li>
+
+                </ul>
+
+                <!-- Right Menu -->
+
+                <div class="nav-action">
+
+                    <!-- Language -->
+
+                    <button id="languageBtn">
+
+                        🇮🇩
+
+                    </button>
+
+                    <!-- Dark -->
+
+                    <button id="themeBtn">
+
+                        <i class="fa-solid fa-moon"></i>
+
+                    </button>
+
+                    <!-- Mobile -->
+
+                    <button class="hamburger">
+
+                        <i class="fa-solid fa-bars"></i>
+
+                    </button>
+
+                </div>
+
+            </nav>
+
+        </div>
+
+    </header>
+
+    <!--====================================
+            HERO
+    =====================================-->
+
+    <main>
+
+        <section id="home"
+            class="hero">
+
+            <div class="container hero-grid">
+
+                <!-- LEFT -->
+
+                <div class="hero-content"
+                    data-aos="fade-right">
+
+                    <h1>
+
+                        <span data-lang-id="Rizky"
+                            data-lang-en="Rizky">Rizky</span>
+
+                        <span data-lang-id="Adimuti"
+                            data-lang-en="Adimuti">Adimuti</span>
+
+                    </h1>
+
+                    <h2>
+
+                        <span data-lang-id="Mahasiswa Teknik Komputer"
+                            data-lang-en="Computer Engineering Student">
+
+                            Mahasiswa Teknik Komputer
+
+                        </span>
+
+                    </h2>
+
+                    <!-- Typing -->
+
+                    <h3>
+
+                        <span id="typing"></span>
+
+                    </h3>
+
+                    <p>
+
+                        <span data-lang-id="&quot;Lakukan apa pun untuk mengejar cahaya.&quot;"
+                            data-lang-en="&quot;Do whatever it takes to chase the light.&quot;">
+
+                            "Lakukan apa pun untuk mengejar cahaya."
+
+                        </span>
+
+                    </p>
+
+                    <p class="hero-text">
+
+                        <span data-lang-id="Saya adalah mahasiswa Teknik Komputer Universitas Wiralodra semester 4 yang memiliki ketertarikan pada Internet of Things, Artificial Intelligence, Embedded System, dan Web Development."
+                            data-lang-en="I am a 4th semester Computer Engineering student at Wiralodra University with interests in Internet of Things, Artificial Intelligence, Embedded Systems, and Web Development.">
+
+                            Saya adalah mahasiswa Teknik Komputer
+                            Universitas Wiralodra semester 4 yang
+                            memiliki ketertarikan pada Internet of Things,
+                            Artificial Intelligence, Embedded System,
+                            dan Web Development.
+
+                        </span>
+
+                    </p>
+
+                    <!-- BUTTON -->
+
+                    <div class="hero-button">
+
+                        <a href="#projects"
+                            class="btn btn-primary">
+
+                            <i class="fa-solid fa-code"></i>
+
+                            <span data-lang-id="Lihat Project"
+                                data-lang-en="View Projects">
+
+                                Lihat Project
+
+                            </span>
+
+                        </a>
+
+                        <a href="https://drive.google.com/uc?export=download&id=1NTt8yihmA_bNCnX1GqmO0VE9dUYoxpA-"
+                            id="downloadCV"
+                            class="btn btn-outline"
+                            target="_blank">
+
+                            <i class="fa-solid fa-download"></i>
+
+                            <span data-lang-id="Download CV"
+                                data-lang-en="Download CV">
+
+                                Download CV
+
+                            </span>
+
+                        </a>
+
+                    </div>
+
+                    <!-- SOCIAL -->
+
+                    <div class="social">
+
+                        <a href="https://github.com/riz113"
+                            target="_blank">
+
+                            <i class="fab fa-github"></i>
+
+                        </a>
+
+                        <a href="https://id.linkedin.com/in/rizky-adimuti-06a54433b"
+                            target="_blank">
+
+                            <i class="fab fa-linkedin"></i>
+
+                        </a>
+
+                        <a href="https://instagram.com/rizky_amd64"
+                            target="_blank">
+
+                            <i class="fab fa-instagram"></i>
+
+                        </a>
+
+                        <a href="mailto:bisakiki2@gmail.com">
+
+                            <i class="fa-solid fa-envelope"></i>
+
+                        </a>
+
+                    </div>
+
+                </div>
+
+                <!-- RIGHT -->
+
+                <div class="hero-image"
+                    data-aos="fade-left">
+
+                    <div class="profile-card">
+
+                        <img src="assets/images/profile.png"
+                            alt="Rizky Adimuti">
+
+                        <div class="circle circle1"></div>
+                        <div class="circle circle2"></div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+        <!--====================================
+                QUICK INFO
+        =====================================-->
+
+        <section class="quick-info">
+
+            <div class="container">
+
+                <div class="info-card">
+
+                    <i class="fa-solid fa-building-columns"></i>
+
+                    <h3>
+
+                        <span data-lang-id="Universitas"
+                            data-lang-en="University">
+
+                            Universitas
+
+                        </span>
+
+                    </h3>
+
+                    <p>
+
+                        <span data-lang-id="Universitas Wiralodra"
+                            data-lang-en="Wiralodra University">
+
+                            Universitas Wiralodra
+
+                        </span>
+
+                    </p>
+
+                </div>
+
+                <div class="info-card">
+
+                    <i class="fa-solid fa-user-graduate"></i>
+
+                    <h3>
+
+                        <span data-lang-id="Semester"
+                            data-lang-en="Semester">
+
+                            Semester
+
+                        </span>
+
+                    </h3>
+
+                    <p>
+
+                        <span data-lang-id="4"
+                            data-lang-en="4">
+
+                            4
+
+                        </span>
+
+                    </p>
+
+                </div>
+
+                <div class="info-card">
+
+                    <i class="fa-solid fa-microchip"></i>
+
+                    <h3>
+
+                        <span data-lang-id="Fokus"
+                            data-lang-en="Focus">
+
+                            Fokus
+
+                        </span>
+
+                    </h3>
+
+                    <p>
+
+                        <span data-lang-id="IoT &amp; AI"
+                            data-lang-en="IoT &amp; AI">
+
+                            IoT & AI
+
+                        </span>
+
+                    </p>
+
+                </div>
+
+                <div class="info-card">
+
+                    <i class="fa-solid fa-location-dot"></i>
+
+                    <h3>
+
+                        <span data-lang-id="Domisili"
+                            data-lang-en="Location">
+
+                            Domisili
+
+                        </span>
+
+                    </h3>
+
+                    <p>
+
+                        <span data-lang-id="Indramayu"
+                            data-lang-en="Indramayu">
+
+                            Indramayu
+
+                        </span>
+
+                    </p>
+
+                </div>
+
+            </div>
+
+        </section>
+
+        <!--====================================
+                ABOUT
+        =====================================-->
+
+        <section id="about" class="about">
+
+            <div class="container">
+
+                <div class="section-header" data-aos="fade-up">
+
+                    <span class="section-subtitle">
+
+                        <span data-lang-id="Tentang Saya"
+                            data-lang-en="About Me">
+
+                            Tentang Saya
+
+                        </span>
+
+                    </span>
+
+                    <h2 class="section-title">
+
+                        <span data-lang-id="Mengenal Lebih Dekat"
+                            data-lang-en="Get to Know Me">
+
+                            Mengenal Lebih Dekat
+
+                        </span>
+
+                    </h2>
+
+                </div>
+
+                <div class="about-wrapper">
+
+                    <!-- FOTO -->
+
+                    <div class="about-image"
+                        data-aos="fade-right">
+
+                        <img src="assets/images/about-profile.png"
+                            alt="About Rizky">
+
+                    </div>
+
+                    <!-- ISI -->
+
+                    <div class="about-content"
+                        data-aos="fade-left">
+
+                        <h3>
+
+                            <span data-lang-id="Rizky Adimuti"
+                                data-lang-en="Rizky Adimuti">
+
+                                Rizky Adimuti
+
+                            </span>
+
+                        </h3>
+
+                        <h4>
+
+                            <span data-lang-id="Mahasiwa Teknik Komputer"
+                                data-lang-en="Computer Engineering Student">
+
+                                Mahasiwa Teknik Komputer
+
+                            </span>
+
+                        </h4>
+
+                        <p>
+
+                            <span data-lang-id="Saya adalah mahasiswa Teknik Komputer Universitas Wiralodra semester 4 yang memiliki ketertarikan dalam bidang Internet of Things, Artificial Intelligence, Embedded System, serta Web Development."
+                                data-lang-en="I am a 4th semester Computer Engineering student at Wiralodra University with interests in Internet of Things, Artificial Intelligence, Embedded Systems, and Web Development.">
+
+                                Saya adalah mahasiswa Teknik Komputer
+                                Universitas Wiralodra semester 4 yang
+                                memiliki ketertarikan dalam bidang
+                                Internet of Things,
+                                Artificial Intelligence,
+                                Embedded System,
+                                serta Web Development.
+
+                            </span>
+
+                        </p>
+
+                        <p>
+
+                            <span data-lang-id="Saya senang membangun solusi berbasis teknologi yang mampu membantu aktivitas manusia melalui sistem otomatisasi, mikrokontroler, dan aplikasi modern."
+                                data-lang-en="I enjoy building technology-based solutions that can help human activities through automation systems, microcontrollers, and modern applications.">
+
+                                Saya senang membangun solusi
+                                berbasis teknologi yang mampu
+                                membantu aktivitas manusia
+                                melalui sistem otomatisasi,
+                                mikrokontroler,
+                                dan aplikasi modern.
+
+                            </span>
+
+                        </p>
+
+                        <blockquote>
+
+                            <span data-lang-id="&quot;Lakukan apa pun untuk mengejar cahaya.&quot;"
+                                data-lang-en="&quot;Do whatever it takes to chase the light.&quot;">
+
+                                "Lakukan apa pun untuk mengejar cahaya."
+
+                            </span>
+
+                        </blockquote>
+
+                        <div class="about-info">
+
+                            <div class="info-item">
+
+                                <span data-lang-id="Nama"
+                                    data-lang-en="Name">
+
+                                    Nama
+
+                                </span>
+
+                                <strong>
+
+                                    <span data-lang-id="Rizky Adimuti"
+                                        data-lang-en="Rizky Adimuti">
+
+                                        Rizky Adimuti
+
+                                    </span>
+
+                                </strong>
+
+                            </div>
+
+                            <div class="info-item">
+
+                                <span data-lang-id="Status"
+                                    data-lang-en="Status">
+
+                                    Status
+
+                                </span>
+
+                                <strong>
+
+                                    <span data-lang-id="Mahasiswa"
+                                        data-lang-en="Student">
+
+                                        Mahasiswa
+
+                                    </span>
+
+                                </strong>
+
+                            </div>
+
+                            <div class="info-item">
+
+                                <span data-lang-id="Kampus"
+                                    data-lang-en="University">
+
+                                    Kampus
+
+                                </span>
+
+                                <strong>
+
+                                    <span data-lang-id="Universitas Wiralodra"
+                                        data-lang-en="Wiralodra University">
+
+                                        Universitas Wiralodra
+
+                                    </span>
+
+                                </strong>
+
+                            </div>
+
+                            <div class="info-item">
+
+                                <span data-lang-id="Alamat"
+                                    data-lang-en="Address">
+
+                                    Alamat
+
+                                </span>
+
+                                <strong>
+
+                                    <span data-lang-id="Haurgeulis, Indramayu"
+                                        data-lang-en="Haurgeulis, Indramayu">
+
+                                        Haurgeulis,
+                                        Indramayu
+
+                                    </span>
+
+                                </strong>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+        <!--====================================
+                STATISTICS
+        =====================================-->
+
+        <section class="statistics">
+
+            <div class="container">
+
+                <div class="stat-card">
+
+                    <h2 class="counter"
+                        data-target="2">
+
+                        0
+
+                    </h2>
+
+                    <p>
+
+                        <span data-lang-id="Projects"
+                            data-lang-en="Projects">
+
+                            Projects
+
+                        </span>
+
+                    </p>
+
+                </div>
+
+                <div class="stat-card">
+
+                    <h2 class="counter"
+                        data-target="1">
+
+                        0
+
+                    </h2>
+
+                    <p>
+
+                        <span data-lang-id="Experiences"
+                            data-lang-en="Experiences">
+
+                            Experiences
+
+                        </span>
+
+                    </p>
+
+                </div>
+
+                <div class="stat-card">
+
+                    <h2 class="counter"
+                        data-target="6">
+
+                        0
+
+                    </h2>
+
+                    <p>
+
+                        <span data-lang-id="Technologies"
+                            data-lang-en="Technologies">
+
+                            Technologies
+
+                        </span>
+
+                    </p>
+
+                </div>
+
+                <div class="stat-card">
+
+                    <h2 class="counter"
+                        data-target="100">
+
+                        0
+
+                    </h2>
+
+                    <p>
+
+                        <span data-lang-id="Passion"
+                            data-lang-en="Passion">
+
+                            Passion
+
+                        </span>
+
+                    </p>
+
+                </div>
+
+            </div>
+
+        </section>
+
+        <!--====================================
+                SKILLS
+        =====================================-->
+
+        <section id="skills"
+            class="skills">
+
+            <div class="container">
+
+                <div class="section-header">
+
+                    <span>
+
+                        <span data-lang-id="Skills"
+                            data-lang-en="Skills">
+
+                            Skills
+
+                        </span>
+
+                    </span>
+
+                    <h2>
+
+                        <span data-lang-id="Programming Skills"
+                            data-lang-en="Programming Skills">
+
+                            Programming Skills
+
+                        </span>
+
+                    </h2>
+
+                </div>
+
+                <div class="skill-wrapper">
+
+                    <!-- HTML -->
+
+                    <div class="skill-item">
+
+                        <div class="skill-title">
+
+                            <span>HTML5</span>
+
+                            <span>90%</span>
+
+                        </div>
+
+                        <div class="progress">
+
+                            <div class="progress-bar html">
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <!-- CSS -->
+
+                    <div class="skill-item">
+
+                        <div class="skill-title">
+
+                            <span>CSS3</span>
+
+                            <span>85%</span>
+
+                        </div>
+
+                        <div class="progress">
+
+                            <div class="progress-bar css">
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <!-- Java -->
+
+                    <div class="skill-item">
+
+                        <div class="skill-title">
+
+                            <span>Java</span>
+
+                            <span>75%</span>
+
+                        </div>
+
+                        <div class="progress">
+
+                            <div class="progress-bar java">
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <!-- Python -->
+
+                    <div class="skill-item">
+
+                        <div class="skill-title">
+
+                            <span>Python</span>
+
+                            <span>82%</span>
+
+                        </div>
+
+                        <div class="progress">
+
+                            <div class="progress-bar python">
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <!-- C++ -->
+
+                    <div class="skill-item">
+
+                        <div class="skill-title">
+
+                            <span>C / C++</span>
+
+                            <span>80%</span>
+
+                        </div>
+
+                        <div class="progress">
+
+                            <div class="progress-bar cpp">
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+        <!--====================================
+                TECH STACK
+        =====================================-->
+
+        <section class="tech-stack">
+
+            <div class="container">
+
+                <div class="section-header">
+
+                    <span>
+
+                        <span data-lang-id="Tech Stack"
+                            data-lang-en="Tech Stack">
+
+                            Tech Stack
+
+                        </span>
+
+                    </span>
+
+                    <h2>
+
+                        <span data-lang-id="Tools &amp; Technologies"
+                            data-lang-en="Tools &amp; Technologies">
+
+                            Tools & Technologies
+
+                        </span>
+
+                    </h2>
+
+                </div>
+
+                <div class="tech-grid">
+
+                    <div class="tech-card">
+                        <i class="fa-brands fa-html5"></i>
+                        <h3>HTML5</h3>
+                    </div>
+
+                    <div class="tech-card">
+                        <i class="fa-brands fa-css3-alt"></i>
+                        <h3>CSS3</h3>
+                    </div>
+
+                    <div class="tech-card">
+                        <i class="fa-brands fa-js"></i>
+                        <h3>JavaScript</h3>
+                    </div>
+
+                    <div class="tech-card">
+                        <i class="fa-brands fa-java"></i>
+                        <h3>Java</h3>
+                    </div>
+
+                    <div class="tech-card">
+                        <i class="fa-brands fa-python"></i>
+                        <h3>Python</h3>
+                    </div>
+
+                    <div class="tech-card">
+                        <i class="fa-solid fa-microchip"></i>
+                        <h3>Arduino</h3>
+                    </div>
+
+                    <div class="tech-card">
+                        <i class="fa-solid fa-microchip"></i>
+                        <h3>ESP32</h3>
+                    </div>
+
+                    <div class="tech-card">
+                        <i class="fa-brands fa-github"></i>
+                        <h3>GitHub</h3>
+                    </div>
+
+                    <div class="tech-card">
+                        <i class="fa-solid fa-code"></i>
+                        <h3>VS Code</h3>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+        <!--====================================
+                WHY CHOOSE ME
+        =====================================-->
+
+        <section class="why-me">
+
+            <div class="container">
+
+                <div class="section-header">
+
+                    <span>
+
+                        <span data-lang-id="Why Choose Me"
+                            data-lang-en="Why Choose Me">
+
+                            Why Choose Me
+
+                        </span>
+
+                    </span>
+
+                    <h2>
+
+                        <span data-lang-id="Nilai yang Saya Tawarkan"
+                            data-lang-en="Values I Offer">
+
+                            Nilai yang Saya Tawarkan
+
+                        </span>
+
+                    </h2>
+
+                </div>
+
+                <div class="why-grid">
+
+                    <div class="why-card">
+
+                        <i class="fa-solid fa-lightbulb"></i>
+
+                        <h3>
+
+                            <span data-lang-id="Problem Solving"
+                                data-lang-en="Problem Solving">
+
+                                Problem Solving
+
+                            </span>
+
+                        </h3>
+
+                        <p>
+
+                            <span data-lang-id="Senang menganalisis masalah dan mencari solusi berbasis teknologi."
+                                data-lang-en="Enjoy analyzing problems and finding technology-based solutions.">
+
+                                Senang menganalisis masalah dan
+                                mencari solusi berbasis teknologi.
+
+                            </span>
+
+                        </p>
+
+                    </div>
+
+                    <div class="why-card">
+
+                        <i class="fa-solid fa-robot"></i>
+
+                        <h3>
+
+                            <span data-lang-id="AI Enthusiast"
+                                data-lang-en="AI Enthusiast">
+
+                                AI Enthusiast
+
+                            </span>
+
+                        </h3>
+
+                        <p>
+
+                            <span data-lang-id="Aktif mempelajari Artificial Intelligence dan penerapannya dalam kehidupan nyata."
+                                data-lang-en="Actively studying Artificial Intelligence and its real-life applications.">
+
+                                Aktif mempelajari Artificial Intelligence
+                                dan penerapannya dalam kehidupan nyata.
+
+                            </span>
+
+                        </p>
+
+                    </div>
+
+                    <div class="why-card">
+
+                        <i class="fa-solid fa-wifi"></i>
+
+                        <h3>
+
+                            <span data-lang-id="IoT Developer"
+                                data-lang-en="IoT Developer">
+
+                                IoT Developer
+
+                            </span>
+
+                        </h3>
+
+                        <p>
+
+                            <span data-lang-id="Berpengalaman menggunakan ESP32, Arduino, dan Raspberry Pi."
+                                data-lang-en="Experienced in using ESP32, Arduino, and Raspberry Pi.">
+
+                                Berpengalaman menggunakan
+                                ESP32, Arduino,
+                                dan Raspberry Pi.
+
+                            </span>
+
+                        </p>
+
+                    </div>
+
+                    <div class="why-card">
+
+                        <i class="fa-solid fa-rocket"></i>
+
+                        <h3>
+
+                            <span data-lang-id="Fast Learner"
+                                data-lang-en="Fast Learner">
+
+                                Fast Learner
+
+                            </span>
+
+                        </h3>
+
+                        <p>
+
+                            <span data-lang-id="Cepat beradaptasi dengan teknologi baru dan senang mempelajari hal-hal baru."
+                                data-lang-en="Quick to adapt to new technologies and eager to learn new things.">
+
+                                Cepat beradaptasi dengan
+                                teknologi baru dan senang
+                                mempelajari hal-hal baru.
+
+                            </span>
+
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+        <!--====================================
+                FEATURED PROJECTS
+        =====================================-->
+
+        <section id="projects" class="projects">
+
+            <div class="container">
+
+                <div class="section-header" data-aos="fade-up">
+
+                    <span>
+
+                        <span data-lang-id="Portfolio"
+                            data-lang-en="Portfolio">
+
+                            Portfolio
+
+                        </span>
+
+                    </span>
+
+                    <h2>
+
+                        <span data-lang-id="Featured Projects"
+                            data-lang-en="Featured Projects">
+
+                            Featured Projects
+
+                        </span>
+
+                    </h2>
+
+                    <p>
+
+                        <span data-lang-id="Beberapa project yang telah saya kerjakan selama proses belajar di Teknik Komputer."
+                            data-lang-en="Some projects I have worked on during my studies in Computer Engineering.">
+
+                            Beberapa project yang telah saya kerjakan selama
+                            proses belajar di Teknik Komputer.
+
+                        </span>
+
+                    </p>
+
+                </div>
+
+                <div class="project-grid">
+
+                    <!-- PROJECT 1 -->
+
+                    <div class="project-card" data-aos="zoom-in">
+
+                        <div class="project-image">
+
+                            <img src="assets/images/project-etle.png"
+                                alt="Miniatur ETLE">
+
+                            <span class="project-badge">
+
+                                <span data-lang-id="Featured"
+                                    data-lang-en="Featured">
+
+                                    Featured
+
+                                </span>
+
+                            </span>
+
+                        </div>
+
+                        <div class="project-content">
+
+                            <h3>
+
+                                <span data-lang-id="Miniatur ETLE Berbasis Mikrokontroler"
+                                    data-lang-en="Microcontroller-Based ETLE Miniature">
+
+                                    Miniatur ETLE Berbasis Mikrokontroler
+
+                                </span>
+
+                            </h3>
+
+                            <p>
+
+                                <span data-lang-id="Miniatur Electronic Traffic Law Enforcement menggunakan ESP32, Arduino, Raspberry Pi serta kamera untuk simulasi sistem penegakan hukum lalu lintas."
+                                    data-lang-en="Electronic Traffic Law Enforcement miniature using ESP32, Arduino, Raspberry Pi and camera to simulate traffic law enforcement system.">
+
+                                    Miniatur Electronic Traffic Law Enforcement
+                                    menggunakan ESP32,
+                                    Arduino,
+                                    Raspberry Pi
+                                    serta kamera untuk simulasi
+                                    sistem penegakan hukum lalu lintas.
+
+                                </span>
+
+                            </p>
+
+                            <div class="project-tech">
+
+                                <span>ESP32</span>
+
+                                <span>Arduino</span>
+
+                                <span>Raspberry Pi</span>
+
+                            </div>
+
+                            <div class="project-button">
+
+                                <a href="project-etle.html">
+
+                                    <span data-lang-id="Preview"
+                                        data-lang-en="Preview">
+
+                                        Preview
+
+                                    </span>
+
+                                </a>
+
+                                <a href="https://instagram.com/rizky_amd64">
+
+                                    <span data-lang-id="Instagram"
+                                        data-lang-en="Instagram">
+
+                                        Instagram
+
+                                    </span>
+
+                                </a>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <!-- PROJECT 2 -->
+
+                    <div class="project-card"
+                        data-aos="zoom-in"
+                        data-aos-delay="200">
+
+                        <div class="project-image">
+
+                            <img src="assets/images/project-smartpark.jpeg"
+                                alt="Smart Park Lock">
+
+                        </div>
+
+                        <div class="project-content">
+
+                            <h3>
+
+                                <span data-lang-id="Smart Park Lock"
+                                    data-lang-en="Smart Park Lock">
+
+                                    Smart Park Lock
+
+                                </span>
+
+                            </h3>
+
+                            <p>
+
+                                <span data-lang-id="Sistem parkir otomatis berbasis Arduino yang mampu membuka dan mengunci area parkir secara otomatis."
+                                    data-lang-en="Arduino-based automatic parking system that can open and lock parking area automatically.">
+
+                                    Sistem parkir otomatis berbasis Arduino
+                                    yang mampu membuka dan mengunci
+                                    area parkir secara otomatis.
+
+                                </span>
+
+                            </p>
+
+                            <div class="project-tech">
+
+                                <span>Arduino</span>
+
+                                <span>Servo</span>
+
+                                <span>Sensor</span>
+
+                            </div>
+
+                            <div class="project-button">
+
+                                <a href="project-smartpark.html">
+
+                                    <span data-lang-id="Preview"
+                                        data-lang-en="Preview">
+
+                                        Preview
+
+                                    </span>
+
+                                </a>
+
+                                <a href="https://instagram.com/rizky_amd64">
+
+                                    <span data-lang-id="Instagram"
+                                        data-lang-en="Instagram">
+
+                                        Instagram
+
+                                    </span>
+
+                                </a>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+        <!--====================================
+                EXPERIENCE
+        =====================================-->
+
+        <section id="experience" class="experience">
+
+            <div class="container">
+
+                <div class="section-header">
+
+                    <span>
+
+                        <span data-lang-id="Experience"
+                            data-lang-en="Experience">
+
+                            Experience
+
+                        </span>
+
+                    </span>
+
+                    <h2>
+
+                        <span data-lang-id="Pengalaman"
+                            data-lang-en="Experience">
+
+                            Pengalaman
+
+                        </span>
+
+                    </h2>
+
+                </div>
+
+                <div class="timeline">
+
+                    <!-- ITEM -->
+
+                    <div class="timeline-item">
+
+                        <div class="timeline-dot"></div>
+
+                        <div class="timeline-content">
+
+                            <span class="year">
+
+                                <span data-lang-id="agustus - desember, 2024"
+                                    data-lang-en="August - December, 2024">
+
+                                    agustus - desember, 2024
+
+                                </span>
+
+                            </span>
+
+                            <h3>
+
+                                <span data-lang-id="Magang Auto2000 Indramayu"
+                                    data-lang-en="Internship at Auto2000 Indramayu">
+
+                                    Magang Auto2000 Indramayu
+
+                                </span>
+
+                            </h3>
+
+                            <h4>
+
+                                <span data-lang-id="Asisten Mekanik"
+                                    data-lang-en="Mechanical Assistant">
+
+                                    Asisten Mekanik
+
+                                </span>
+
+                            </h4>
+
+                            <p>
+
+                                <span data-lang-id="Membantu proses servis kendaraan, pemeriksaan komponen, serta mempelajari sistem kerja kendaraan Toyota."
+                                    data-lang-en="Assisted in vehicle service processes, component inspections, and learned about Toyota vehicle systems.">
+
+                                    Membantu proses servis kendaraan,
+                                    pemeriksaan komponen,
+                                    serta mempelajari sistem kerja
+                                    kendaraan Toyota.
+
+                                </span>
+
+                            </p>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+        <!--====================================
+                ORGANIZATION
+        =====================================-->
+
+        <section class="organization">
+
+            <div class="container">
+
+                <div class="section-header">
+
+                    <span>
+
+                        <span data-lang-id="Organization"
+                            data-lang-en="Organization">
+
+                            Organization
+
+                        </span>
+
+                    </span>
+
+                    <h2>
+
+                        <span data-lang-id="Organisasi &amp; Kepanitiaan"
+                            data-lang-en="Organizations &amp; Committees">
+
+                            Organisasi & Kepanitiaan
+
+                        </span>
+
+                    </h2>
+
+                </div>
+
+                <div class="organization-grid">
+
+                    <div class="organization-card">
+
+                        <i class="fa-solid fa-users"></i>
+
+                        <h3>
+
+                            <span data-lang-id="BEM FT UNWIR"
+                                data-lang-en="BEM FT UNWIR">
+
+                                BEM FT UNWIR
+
+                            </span>
+
+                        </h3>
+
+                        <p>
+
+                            <span data-lang-id="Aktif mengikuti kegiatan organisasi dan pengembangan mahasiswa."
+                                data-lang-en="Actively participating in organizational activities and student development.">
+
+                                Aktif mengikuti kegiatan organisasi
+                                dan pengembangan mahasiswa.
+
+                            </span>
+
+                        </p>
+
+                    </div>
+
+                    <div class="organization-card">
+
+                        <i class="fa-solid fa-calendar-days"></i>
+
+                        <h3>
+
+                            <span data-lang-id="BURBACEK 24"
+                                data-lang-en="BURBACEK 24">
+
+                                BURBACEK 24
+
+                            </span>
+
+                        </h3>
+
+                        <p>
+
+                            <span data-lang-id="Acara perekrutan anggota baru BESIK UNWIR (Bengkel Seni Kampus) Universitas Wiralodra."
+                                data-lang-en="Recruitment event for new members of BESIK UNWIR (Campus Arts Workshop) Wiralodra University.">
+
+                                Acara perekrutan anggota baru
+                                BESIK UNWIR
+                                (Bengkel Seni Kampus)
+                                Universitas Wiralodra.
+
+                            </span>
+
+                        </p>
+
+                    </div>
+
+                    <div class="organization-card">
+
+                        <i class="fa-solid fa-microchip"></i>
+
+                        <h3>
+
+                            <span data-lang-id="Dies Natalis HMTK"
+                                data-lang-en="Dies Natalis HMTK">
+
+                                Dies Natalis HMTK
+
+                            </span>
+
+                        </h3>
+
+                        <p>
+
+                            <span data-lang-id="Menampilkan project ETLE sebagai hasil karya mahasiswa Teknik Komputer."
+                                data-lang-en="Showcased the ETLE project as a work result of Computer Engineering students.">
+
+                                Menampilkan project ETLE
+                                sebagai hasil karya
+                                mahasiswa Teknik Komputer.
+
+                            </span>
+
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+        <!--====================================
+                GALLERY
+        =====================================-->
+
+        <section id="gallery" class="gallery">
+
+            <div class="container">
+
+                <div class="section-header">
+
+                    <span>
+
+                        <span data-lang-id="Gallery"
+                            data-lang-en="Gallery">
+
+                            Gallery
+
+                        </span>
+
+                    </span>
+
+                    <h2>
+
+                        <span data-lang-id="Dokumentasi"
+                            data-lang-en="Documentation">
+
+                            Dokumentasi
+
+                        </span>
+
+                    </h2>
+
+                    <p>
+
+                        <span data-lang-id="Semua gambar di bawah dapat diganti dengan dokumentasi kegiatan dan project."
+                            data-lang-en="All images below can be replaced with documentation of activities and projects.">
+
+                            Semua gambar di bawah dapat diganti
+                            dengan dokumentasi kegiatan dan project.
+
+                        </span>
+
+                    </p>
+
+                </div>
+
+                <div class="gallery-grid">
+
+                    <img src="assets/images/project-etle.png" alt="Gallery 1">
+
+                    <img src="assets/images/project-smartpark.jpeg" alt="Gallery 2">
+
+                </div>
+
+            </div>
+
+        </section>
+
+        <!--====================================
+                CONTACT
+        =====================================-->
+
+        <section id="contact" class="contact">
+
+            <div class="container">
+
+                <div class="section-header" data-aos="fade-up">
+
+                    <span>
+
+                        <span data-lang-id="Contact"
+                            data-lang-en="Contact">
+
+                            Contact
+
+                        </span>
+
+                    </span>
+
+                    <h2>
+
+                        <span data-lang-id="Hubungi Saya"
+                            data-lang-en="Contact Me">
+
+                            Hubungi Saya
+
+                        </span>
+
+                    </h2>
+
+                    <p>
+
+                        <span data-lang-id="Jangan ragu untuk menghubungi saya apabila ingin berdiskusi, berkolaborasi, ataupun sekadar bertukar pengalaman."
+                            data-lang-en="Feel free to contact me if you want to discuss, collaborate, or just share experiences.">
+
+                            Jangan ragu untuk menghubungi saya apabila
+                            ingin berdiskusi, berkolaborasi, ataupun
+                            sekadar bertukar pengalaman.
+
+                        </span>
+
+                    </p>
+
+                </div>
+
+                <div class="contact-wrapper">
+
+                    <!-- Contact Info -->
+
+                    <div class="contact-info">
+
+                        <div class="contact-card">
+
+                            <i class="fa-solid fa-envelope"></i>
+
+                            <div>
+
+                                <h3>
+
+                                    <span data-lang-id="Email"
+                                        data-lang-en="Email">
+
+                                        Email
+
+                                    </span>
+
+                                </h3>
+
+                                <p>bisakiki2@gmail.com</p>
+
+                            </div>
+
+                        </div>
+
+                        <div class="contact-card">
+
+                            <i class="fa-solid fa-phone"></i>
+
+                            <div>
+
+                                <h3>
+
+                                    <span data-lang-id="WhatsApp"
+                                        data-lang-en="WhatsApp">
+
+                                        WhatsApp
+
+                                    </span>
+
+                                </h3>
+
+                                <p>083149721207</p>
+
+                            </div>
+
+                        </div>
+
+                        <div class="contact-card">
+
+                            <i class="fa-solid fa-location-dot"></i>
+
+                            <div>
+
+                                <h3>
+
+                                    <span data-lang-id="Alamat"
+                                        data-lang-en="Address">
+
+                                        Alamat
+
+                                    </span>
+
+                                </h3>
+
+                                <p>
+
+                                    <span data-lang-id="Desa Sukajati, Haurgeulis, Indramayu"
+                                        data-lang-en="Sukajati Village, Haurgeulis, Indramayu">
+
+                                        Desa Sukajati,
+                                        Haurgeulis,
+                                        Indramayu
+
+                                    </span>
+
+                                </p>
+
+                            </div>
+
+                        </div>
+
+                        <div class="contact-card">
+
+                            <i class="fa-brands fa-github"></i>
+
+                            <div>
+
+                                <h3>
+
+                                    <span data-lang-id="GitHub"
+                                        data-lang-en="GitHub">
+
+                                        GitHub
+
+                                    </span>
+
+                                </h3>
+
+                                <a href="https://github.com/riz113"
+                                    target="_blank">
+
+                                    github.com/riz113
+
+                                </a>
+
+                            </div>
+
+                        </div>
+
+                        <div class="contact-card">
+
+                            <i class="fa-brands fa-linkedin"></i>
+
+                            <div>
+
+                                <h3>
+
+                                    <span data-lang-id="LinkedIn"
+                                        data-lang-en="LinkedIn">
+
+                                        LinkedIn
+
+                                    </span>
+
+                                </h3>
+
+                                <a href="https://id.linkedin.com/in/rizky-adimuti-06a54433b"
+                                    target="_blank">
+
+                                    Rizky Adimuti
+
+                                </a>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <!-- Contact Form -->
+
+                    <div class="contact-form">
+
+                        <form>
+
+                            <input
+                                type="text"
+                                placeholder="Nama"
+                                data-lang-id-placeholder="Nama"
+                                data-lang-en-placeholder="Name">
+
+                            <input
+                                type="email"
+                                placeholder="Email"
+                                data-lang-id-placeholder="Email"
+                                data-lang-en-placeholder="Email">
+
+                            <input
+                                type="text"
+                                placeholder="Subjek"
+                                data-lang-id-placeholder="Subjek"
+                                data-lang-en-placeholder="Subject">
+
+                            <textarea
+                                rows="6"
+                                placeholder="Tulis pesan..."
+                                data-lang-id-placeholder="Tulis pesan..."
+                                data-lang-en-placeholder="Write a message..."></textarea>
+
+                            <button
+                                type="submit"
+                                class="btn btn-primary">
+
+                                <span data-lang-id="Kirim Pesan"
+                                    data-lang-en="Send Message">
+
+                                    Kirim Pesan
+
+                                </span>
+
+                            </button>
+
+                        </form>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+        <!--====================================
+                BACK TO TOP
+        =====================================-->
+
+        <button id="backToTop">
+
+            <i class="fa-solid fa-arrow-up"></i>
+
+        </button>
+
+    </main>
+
+    <!--====================================
+            FOOTER
+    =====================================-->
+
+    <footer>
+
+        <div class="container">
+
+            <div class="footer-content">
+
+                <div class="footer-left">
+
+                    <h2>
+
+                        <span data-lang-id="Rizky Adimuti"
+                            data-lang-en="Rizky Adimuti">
+
+                            Rizky Adimuti
+
+                        </span>
+
+                    </h2>
+
+                    <p>
+
+                        <span data-lang-id="Mahasiswa Teknik Komputer · IoT Enthusiast · AI Enthusiast · Web Developer"
+                            data-lang-en="Computer Engineering Student · IoT Enthusiast · AI Enthusiast · Web Developer">
+
+                            Mahasiswa Teknik Komputer
+
+                            IoT Enthusiast
+
+                            AI Enthusiast
+
+                            Web Developer
+
+                        </span>
+
+                    </p>
+
+                </div>
+
+                <div class="footer-center">
+
+                    <h3>
+
+                        <span data-lang-id="Quick Links"
+                            data-lang-en="Quick Links">
+
+                            Quick Links
+
+                        </span>
+
+                    </h3>
+
+                    <ul>
+
+                        <li><a href="#home">
+
+                            <span data-lang-id="Home"
+                                data-lang-en="Home">Home</span>
+
+                        </a></li>
+
+                        <li><a href="#about">
+
+                            <span data-lang-id="About"
+                                data-lang-en="About">About</span>
+
+                        </a></li>
+
+                        <li><a href="#projects">
+
+                            <span data-lang-id="Projects"
+                                data-lang-en="Projects">Projects</span>
+
+                        </a></li>
+
+                        <li><a href="#contact">
+
+                            <span data-lang-id="Contact"
+                                data-lang-en="Contact">Contact</span>
+
+                        </a></li>
+
+                    </ul>
+
+                </div>
+
+                <div class="footer-right">
+
+                    <h3>
+
+                        <span data-lang-id="Follow Me"
+                            data-lang-en="Follow Me">
+
+                            Follow Me
+
+                        </span>
+
+                    </h3>
+
+                    <div class="footer-social">
+
+                        <a href="https://github.com/riz113">
+
+                            <i class="fab fa-github"></i>
+
+                        </a>
+
+                        <a href="https://instagram.com/rizky_amd64">
+
+                            <i class="fab fa-instagram"></i>
+
+                        </a>
+
+                        <a href="https://id.linkedin.com/in/rizky-adimuti-06a54433b">
+
+                            <i class="fab fa-linkedin"></i>
+
+                        </a>
+
+                        <a href="mailto:bisakiki2@gmail.com">
+
+                            <i class="fa-solid fa-envelope"></i>
+
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <hr>
+
+            <div class="copyright">
+
+                <span data-lang-id="© 2026 Rizky Adimuti. Built with ❤️ HTML, CSS & JavaScript."
+                    data-lang-en="© 2026 Rizky Adimuti. Built with ❤️ HTML, CSS & JavaScript.">
+
+                    © 2026 Rizky Adimuti.
+
+                    Built with ❤️ HTML, CSS & JavaScript.
+
+                </span>
+
+            </div>
+
+        </div>
+
+    </footer>
+
+    <!--==============================
+            JAVASCRIPT LIBRARY
+    ===============================-->
+
+    <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.16/dist/typed.umd.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+
+    <!-- Main JS -->
+    <script src="script.js"></script>
+
+    <script>
+        AOS.init({
+            duration:1000,
+            once:true
+        });
+    </script>
+
+</body>
+
+</html>
