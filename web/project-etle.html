@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Miniatur ETLE | Rizky Adimuti</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" />
+
+    <!-- AOS -->
+    <link rel="stylesheet" href="https://unpkg.com/aos@2.3.4/dist/aos.css" />
+
+    <style>
+        /* --- Reset & Base (sama seperti portofolio) --- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: #050816;
+            color: #f0f0f0;
+            line-height: 1.7;
+            padding: 40px 20px;
+        }
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: rgba(255,255,255,0.03);
+            padding: 40px 50px;
+            border-radius: 24px;
+            border: 1px solid #1a1f2e;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.7);
+        }
+        a {
+            color: #00bfff;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        .back-link {
+            display: inline-block;
+            margin-bottom: 30px;
+            font-size: 14px;
+            color: #b0b0b0;
+        }
+        .back-link i {
+            margin-right: 8px;
+        }
+        h1 {
+            font-size: 36px;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+        .badge {
+            display: inline-block;
+            background: rgba(0,191,255,0.15);
+            color: #00bfff;
+            padding: 4px 16px;
+            border-radius: 30px;
+            font-size: 13px;
+            font-weight: 500;
+            margin-bottom: 20px;
+        }
+        .project-image-full {
+            width: 100%;
+            border-radius: 16px;
+            margin: 20px 0 30px;
+            border: 1px solid #1a1f2e;
+        }
+        h2 {
+            font-size: 24px;
+            font-weight: 600;
+            margin: 30px 0 10px;
+            color: #00bfff;
+        }
+        p {
+            color: #c9d1d9;
+            margin-bottom: 16px;
+        }
+        ul {
+            padding-left: 24px;
+            color: #c9d1d9;
+            margin-bottom: 20px;
+        }
+        ul li {
+            margin-bottom: 8px;
+        }
+        .tech-tag {
+            display: inline-block;
+            background: rgba(0,191,255,0.12);
+            color: #00bfff;
+            padding: 4px 16px;
+            border-radius: 30px;
+            font-size: 13px;
+            margin-right: 8px;
+            margin-bottom: 8px;
+        }
+        .btn-back {
+            display: inline-block;
+            margin-top: 30px;
+            padding: 12px 32px;
+            background: #00bfff;
+            color: #050816;
+            font-weight: 600;
+            border-radius: 50px;
+            transition: 0.3s;
+        }
+        .btn-back:hover {
+            background: transparent;
+            color: #00bfff;
+            border: 2px solid #00bfff;
+            text-decoration: none;
+        }
+        hr {
+            border: none;
+            height: 1px;
+            background: #1a1f2e;
+            margin: 30px 0;
+        }
+        @media (max-width: 600px) {
+            .container { padding: 20px; }
+            h1 { font-size: 28px; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container" data-aos="fade-up">
+
+        <!-- Back link -->
+        <a href="index.html" class="back-link">
+            <i class="fa-solid fa-arrow-left"></i> Kembali ke Portfolio
+        </a>
+
+        <!-- Badge -->
+        <span class="badge">Featured Project</span>
+
+        <h1>Miniatur ETLE Berbasis Mikrokontroler</h1>
+
+        <!-- Gambar utama (ganti dengan foto project-mu) -->
+        <img src="assets/images/project-etle.png" alt="Miniatur ETLE" class="project-image-full" />
+
+        <p>
+            <strong>Miniatur Electronic Traffic Law Enforcement (ETLE)</strong> adalah proyek yang saya kerjakan sebagai bentuk implementasi sistem penegakan hukum lalu lintas berbasis teknologi. Proyek ini menggunakan mikrokontroler ESP32, Arduino, dan Raspberry Pi untuk mensimulasikan sistem tilang elektronik secara otomatis.
+        </p>
+
+        <h2>🎯 Tujuan Proyek</h2>
+        <p>
+            Membuat prototipe sistem ETLE yang dapat mendeteksi pelanggaran lalu lintas (misal: menerobos lampu merah) dan mencatatnya secara otomatis menggunakan kamera dan sensor, kemudian mengirimkan data ke server.
+        </p>
+
+        <h2>⚙️ Teknologi yang Digunakan</h2>
+        <div>
+            <span class="tech-tag">ESP32</span>
+            <span class="tech-tag">Arduino</span>
+            <span class="tech-tag">Raspberry Pi</span>
+            <span class="tech-tag">Kamera</span>
+            <span class="tech-tag">Sensor Ultrasonik</span>
+            <span class="tech-tag">Python</span>
+        </div>
+
+        <h2>📌 Fitur Utama</h2>
+        <ul>
+            <li>Deteksi kendaraan melewati lampu merah menggunakan sensor ultrasonik.</li>
+            <li>Pengambilan gambar oleh kamera yang terhubung ke Raspberry Pi.</li>
+            <li>Penyimpanan data pelanggaran ke database lokal.</li>
+            <li>Notifikasi via LED dan buzzer sebagai penanda pelanggaran.</li>
+        </ul>
+
+        <h2>📸 Dokumentasi</h2>
+        <p>
+            (Tambahkan foto-foto proses pembuatan atau hasil akhir di sini.)
+        </p>
+
+        <hr />
+
+        <!-- Link ke sosial / repo -->
+        <p>
+            <i class="fa-brands fa-github"></i> Repositori: <a href="#">(tautan GitHub jika ada)</a><br />
+            <i class="fa-brands fa-instagram"></i> Instagram: <a href="https://instagram.com/rizky_amd64" target="_blank">@rizky_amd64</a>
+        </p>
+
+        <a href="index.html" class="btn-back">
+            <i class="fa-solid fa-arrow-left"></i> Kembali ke Portfolio
+        </a>
+
+    </div>
+
+    <!-- AOS -->
+    <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+    <script>
+        AOS.init({ duration: 800, once: true });
+    </script>
+
+</body>
+</html>
